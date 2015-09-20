@@ -1,6 +1,6 @@
 var SPI = require('spi');
 var median = require('median')
-var average = new Array(20);
+var average = [];
 var lastAverage;
 var averageCount =0;
 var signalMax = 0;
