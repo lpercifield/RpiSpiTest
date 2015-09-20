@@ -36,7 +36,7 @@ setInterval(function(){
 setInterval(function(){
  peakToPeak = 0;
  peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
- average.shift();
+ var first = average.shift();
  average.push(peakToPeak);
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
@@ -44,7 +44,7 @@ setInterval(function(){
  }
  outString += "*";
  var value = median(average);
- console.log("median value is " + value)
+ console.log("median value is " + value + " First was: "+ first);
  //console.log(outString);
  signalMax = 0;
  signalMin = 4096;
