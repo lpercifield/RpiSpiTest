@@ -43,7 +43,7 @@ setInterval(function(){
    outString += " ";
  }
  outString += "*";
- var value = median(arr)
+ var value = median(average);
  console.log("median value is " + value)
  //console.log(outString);
  signalMax = 0;
