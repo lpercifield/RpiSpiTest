@@ -39,7 +39,7 @@ setInterval(function(){
  if(average.length == 20){
    var first = average.shift();
  }
- average.push(peakToPeak);
+ average.unshift(peakToPeak);
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
    outString += " ";
