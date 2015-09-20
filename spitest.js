@@ -13,10 +13,10 @@ var rxbuf = new Buffer([ 0x00, 0x00, 0x00 ]);
 
 setTimeout(function(){
   spi.read(rxbuf, function(device, buf) {
-    var s = "";
-    for (var i=0; i < buf.length; i++)
-      s = s + buf[i] + " ";
-    console.log(s);
+    // var s = "";
+    // for (var i=0; i < buf.length; i++)
+    //   s = s + buf[i] + " ";
+    // console.log(s);
     console.log(buf.readUInt32BE(0));
   });
 },100);
