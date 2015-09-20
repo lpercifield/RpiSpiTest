@@ -36,9 +36,9 @@ setInterval(function(){
 setInterval(function(){
  peakToPeak = 0;
  peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
- average.unshift(peakToPeak);
+ average.push(peakToPeak);
  if(average.length == 20){
-   var first = average.pop();
+   var first = average.shift();
  }
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
