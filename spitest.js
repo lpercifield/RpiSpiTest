@@ -40,6 +40,8 @@ setInterval(function(){
  if(average.length == 20){
    var first = average.shift();
  }
+ var value = medianFun(average.slice(0));
+ console.log("median value is " + value);
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
    outString += " ";
@@ -47,8 +49,6 @@ setInterval(function(){
  outString += "*";
  //var averageToMedian = average.slice(0);
  //averageToMedian = average
- var value = medianFun(average.slice(0));
- console.log("median value is " + value + " First was: "+ first+ " Last was: "+ peakToPeak + " Array: " + average.toString());
  //console.log(outString);
  signalMax = 0;
  signalMin = 4096;
