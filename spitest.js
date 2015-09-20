@@ -11,9 +11,12 @@ var spi = new SPI.Spi('/dev/spidev0.1', {
 var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
 var rxbuf = new Buffer([ 0x00, 0x00, 0x00 ]);
 
-spi.read(rxbuf, function(device, buf) {
+setTimeout(function(){
+  spi.read(rxbuf, function(device, buf) {
     var s = "";
     for (var i=0; i < buf.length; i++)
       s = s + buf[i] + " ";
     console.log(s);
+    console.log(buf.readUInt32BE(0));
   });
+},100);
