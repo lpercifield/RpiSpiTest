@@ -42,7 +42,7 @@ setInterval(function(){
  }
  var value = medianFun(average.slice(0));
  var outString = "median value is " + value;
- var outString = "";
+ //var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
    outString += " ";
  }
