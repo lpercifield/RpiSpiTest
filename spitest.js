@@ -39,5 +39,5 @@ setInterval(function(){
    outString += " ";
  }
  outString += "*";
- //console.log(peakToPeak);
+ console.log(outString);
 },50);
