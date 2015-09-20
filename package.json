@@ -1,0 +1,25 @@
+{
+  "name": "RpiSpiTest",
+  "version": "0.0.1",
+  "description": "Testing Spi communication on Rpi 2",
+  "main": "spitest.js",
+  "dependencies": {
+    "spi": "~0.2.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lpercifield/RpiSpiTest"
+  },
+  "keywords": [
+    "hardware",
+    "raspberrypi",
+    "spi"
+  ],
+  "author": "Leif Percifield",
+  "license": "The MIT License (MIT)",
+  "bugs": {
+    "url": "https://github.com/lpercifield/RpiSpiTest/issues"
+  },
+  "homepage": "https://github.com/lpercifield/RpiSpiTest"
+}
