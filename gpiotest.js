@@ -44,5 +44,5 @@ var getADC = function(channel){
   var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
   spi.transfer(spiData, rxbuf, function(device, buf) {
     console.log("Channel " +channel +": " +buf.readUInt16BE(0));
-  }
+  });
 }
