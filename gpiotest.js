@@ -1,7 +1,7 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
 
-var pin   = 7;
+var mq7pin   = 24;
 var onDelay = 60000;
 var offDelay = 90000;
 var count = 0;
@@ -40,7 +40,7 @@ setInterval(function(){
 //     }, offDelay);
 // }
 var getADC = function(channel){
-  var spiData =  new Buffer([1,0x80|(channel << 4),0]);
+  var spiData =  new Buffer([1,(8+channel) << 4,0]);
   var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
   spi.transfer(spiData, rxbuf, function(device, buf) {
     console.log("Channel " +channel +": " +buf.readUInt16BE(0));
