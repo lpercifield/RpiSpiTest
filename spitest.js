@@ -1,5 +1,5 @@
 var SPI = require('spi');
-var median = require('median')
+//var median = require('median')
 var average = [];
 var lastAverage;
 var averageCount =0;
@@ -47,9 +47,21 @@ setInterval(function(){
  outString += "*";
  var averageToMedian = new Array();
  averageToMedian = average
- var value = median(averageToMedian);
+ var value = medianFun(averageToMedian);
  console.log("median value is " + value + " First was: "+ first+ " Last was: "+ peakToPeak + " Array: " + average.toString());
  //console.log(outString);
  signalMax = 0;
  signalMin = 4096;
 },50);
+
+function medianFun(values) {
+
+    values.sort( function(a,b) {return a - b;} );
+
+    var half = Math.floor(values.length/2);
+
+    if(values.length % 2)
+        return values[half];
+    else
+        return (values[half-1] + values[half]) / 2.0;
+}
