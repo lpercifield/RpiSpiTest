@@ -1,6 +1,6 @@
 var SPI = require('spi');
 var median = require('median')
-var average = [];
+var average = new Array(20);
 var lastAverage;
 var averageCount =0;
 var signalMax = 0;
@@ -45,7 +45,8 @@ setInterval(function(){
    outString += " ";
  }
  outString += "*";
- var averageToMedian = average;
+ var averageToMedian = new Array();
+ averageToMedian = average
  var value = median(averageToMedian);
  console.log("median value is " + value + " First was: "+ first+ " Last was: "+ peakToPeak + " Array: " + average.toString());
  //console.log(outString);
