@@ -7,7 +7,7 @@ var offDelay = 90000;
 var count = 0;
 var max   = 3;
 
-gpio.setup(pin, gpio.DIR_OUT, on);
+//gpio.setup(pin, gpio.DIR_OUT, on);
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
