@@ -9,9 +9,9 @@ var spi = new SPI.Spi('/dev/spidev0.1', {
   });
 
 var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
-var rxbuf = new Buffer([ 0x00, 0x00, 0x00 , 0x00]);
+var rxbuf = new Buffer([ 0x00, 0x00, 0x00 , 0x00cat]);
 
-setTimeout(function(){
+setInterval(function(){
   spi.read(rxbuf, function(device, buf) {
     // var s = "";
     // for (var i=0; i < buf.length; i++)
