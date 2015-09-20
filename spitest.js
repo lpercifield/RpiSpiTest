@@ -9,7 +9,7 @@ var spi = new SPI.Spi('/dev/spidev0.1', {
   });
 
 var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
-var rxbuf = new Buffer([ 0x00, 0x00, 0x00 ]);
+var rxbuf = new Buffer([ 0x00, 0x00, 0x00 , 0x00]);
 
 setTimeout(function(){
   spi.read(rxbuf, function(device, buf) {
