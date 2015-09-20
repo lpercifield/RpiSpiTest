@@ -17,6 +17,6 @@ setInterval(function(){
     // for (var i=0; i < buf.length; i++)
     //   s = s + buf[i] + " ";
     // console.log(s);
-    console.log(buf.readUInt32BE(0));
+    console.log(buf.readUInt32LE(0));
   });
 },100);
