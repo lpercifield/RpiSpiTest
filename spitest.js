@@ -32,7 +32,7 @@ setInterval(function(){
 },1);
 
 setInterval(function(){
-  peakToPeak = 0;
+ peakToPeak = 0;
  peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
@@ -40,4 +40,6 @@ setInterval(function(){
  }
  outString += "*";
  console.log(outString);
+ signalMax = 0;
+ signalMin = 4096;
 },50);
