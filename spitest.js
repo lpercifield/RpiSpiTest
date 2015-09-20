@@ -36,10 +36,10 @@ setInterval(function(){
 setInterval(function(){
  peakToPeak = 0;
  peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
+ average.unshift(peakToPeak);
  if(average.length == 20){
    var first = average.pop();
  }
- average.unshift(peakToPeak);
  var outString = "";
  for(var i = 0; i<peakToPeak/10;i++){
    outString += " ";
