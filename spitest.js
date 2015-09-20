@@ -44,7 +44,7 @@ setInterval(function(){
  }
  outString += "*";
  var value = median(average);
- console.log("median value is " + value + " First was: "+ first);
+ console.log("median value is " + value + " First was: "+ first + " Length: " + average.length);
  //console.log(outString);
  signalMax = 0;
  signalMin = 4096;
