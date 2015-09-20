@@ -1,6 +1,6 @@
 var SPI = require('spi');
 
-var spi = new SPI.Spi('/dev/spidev1.1', {
+var spi = new SPI.Spi('/dev/spidev0.1', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
     'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
   }, function(s){
