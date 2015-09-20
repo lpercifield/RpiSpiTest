@@ -1,4 +1,9 @@
 var SPI = require('spi');
+var average;
+var averageCount =0;
+var signalMax = 0;
+var signalMin = 4096;
+var peakToPeak;
 
 var spi = new SPI.Spi('/dev/spidev0.1', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
@@ -13,10 +18,20 @@ var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
 
 setInterval(function(){
   spi.read(rxbuf, function(device, buf) {
-    // var s = "";
-    // for (var i=0; i < buf.length; i++)
-    //   s = s + buf[i] + " ";
-    // console.log(s);
-    console.log(buf.readUInt16BE(0));
+    //console.log(buf.readUInt16BE(0));
+    var sample = buf.readUInt16BE(0);
+    if (sample > signalMax)
+         {
+            signalMax = sample;  // save just the max levels
+         }
+         else if (sample < signalMin)
+         {
+            signalMin = sample;  // save just the min levels
+         }
   });
-},100);
+},1);
+
+setInterval(function(){
+ peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
+ console.log(peakToPeak);
+},50);
