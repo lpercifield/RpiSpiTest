@@ -45,9 +45,9 @@ setInterval(function(){
    outString += " ";
  }
  outString += "*";
- var averageToMedian = new Array();
- averageToMedian = average
- var value = medianFun(averageToMedian);
+ //var averageToMedian = average.slice(0);
+ //averageToMedian = average
+ var value = medianFun(average.slice(0));
  console.log("median value is " + value + " First was: "+ first+ " Last was: "+ peakToPeak + " Array: " + average.toString());
  //console.log(outString);
  signalMax = 0;
