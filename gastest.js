@@ -2,10 +2,11 @@ var gpio = require('rpi-gpio');
 var SPI = require('spi');
 
 var mq7pin   = 24;
-var onDelay = 60000;
-var offDelay = 90000;
+var onDelay = 2000;
+var offDelay = 2000;
 var count = 0;
 var max   = 3;
+var burnIn = true;
 
 gpio.setup(mq7pin, gpio.DIR_OUT, on);
 
@@ -31,6 +32,11 @@ function on() {
     setTimeout(function() {
         gpio.write(mq7pin, 1, off);
         console.log("ON");
+        // if(burnIn){
+        //   onDelay = 43200000;
+        // }else{
+        //   onDelay = 60000;
+        // }
         count += 1;
     }, onDelay);
 }
