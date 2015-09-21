@@ -7,6 +7,7 @@ console.log("before gpio setup");
 gpio.setup(AM_PIN, gpio.DIR_OUT);
 gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, function(err){
   if (err) throw err;
+  console.log("Calling amreset");
   amReset;
 });
 console.log("after gpio setup");
