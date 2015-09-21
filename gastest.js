@@ -18,10 +18,10 @@ var spi = new SPI.Spi('/dev/spidev0.0', {
     s.maxSpeed(1000000);
     s.open();
   });
-setInterval(function(){
-  getADC(0);
-  getADC(1);
-},500);
+// setInterval(function(){
+//   getADC(0);
+//   getADC(1);
+// },500);
 function on() {
     // if (count >= max) {
     //     gpio.destroy(function() {
@@ -44,6 +44,9 @@ function on() {
 
 function off() {
     setTimeout(function() {
+        console.log("-----READING BEFORE OFF-----")
+        getADC(0);
+        getADC(1);
         gpio.write(mq7pin, 0, on);
         console.log("OFF");
     }, offDelay);

@@ -6,7 +6,8 @@
   "dependencies": {
     "spi": "~0.2.0",
     "median": "~0.0.2",
-    "rpi-gpio": "~0.6.0"
+    "rpi-gpio": "~0.6.0",
+    "node-dht-sensor": "~0.0.8"
   },
   "devDependencies": {},
   "repository": {
