@@ -8,8 +8,8 @@ var count = 0;
 var max   = 3;
 var burnIn = true;
 
-gpio.setup(mq7pin, gpio.DIR_OUT);
-gpio.write(mq7pin, 1, on);
+gpio.setup(mq7pin, gpio.DIR_OUT,function(){gpio.write(mq7pin, 1, on);});
+
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
