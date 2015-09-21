@@ -5,7 +5,10 @@ var AM_RESET_PIN = 22;
 
 console.log("before gpio setup");
 gpio.setup(AM_PIN, gpio.DIR_OUT);
-gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, amReset);
+gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, function(err){
+  if (err) throw err;
+  amReset;
+});
 console.log("after gpio setup");
 
 var sensor = {
