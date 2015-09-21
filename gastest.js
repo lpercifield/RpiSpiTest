@@ -18,7 +18,7 @@ var spi = new SPI.Spi('/dev/spidev0.0', {
   });
 setInterval(function(){
   getADC(0);
-  //getADC(1);
+  getADC(1);
 },500);
 function on() {
     // if (count >= max) {
