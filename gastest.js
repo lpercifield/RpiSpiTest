@@ -2,13 +2,14 @@ var gpio = require('rpi-gpio');
 var SPI = require('spi');
 
 var mq7pin   = 24;
-var onDelay = 2000;
-var offDelay = 2000;
+var onDelay = 60000;
+var offDelay = 90000;
 var count = 0;
 var max   = 3;
 var burnIn = true;
 
-gpio.setup(mq7pin, gpio.DIR_OUT, on);
+gpio.setup(mq7pin, gpio.DIR_OUT);
+gpio.write(mq7pin, 1, on);
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
