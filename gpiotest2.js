@@ -1,7 +1,7 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
 
-var mq7pin   = 22;
+var mq7pin   = 15;
 var onDelay = 6000;
 var offDelay = 6000;
 var count = 0;
