@@ -4,7 +4,7 @@ var AM_PIN = 17;
 var AM_RESET_PIN = 22;
 
 gpio.setup(AM_PIN, gpio.DIR_OUT);
-gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, pause);
+gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, amReset);
 
 var sensor = {
     initialize: function () {
