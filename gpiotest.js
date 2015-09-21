@@ -29,6 +29,7 @@ function on() {
 
     setTimeout(function() {
         gpio.write(amPin, 1, off);
+        console.log("ON");
         count += 1;
     }, on);
 }
@@ -36,6 +37,7 @@ function on() {
 function off() {
     setTimeout(function() {
         gpio.write(amPin, 0, on);
+        console.log("OFF");
     }, on);
 }
 // var getADC = function(channel){
