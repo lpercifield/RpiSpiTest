@@ -7,7 +7,7 @@ var offDelay = 90000;
 var count = 0;
 var max   = 3;
 
-gpio.setup(pin, gpio.DIR_OUT, on);
+gpio.setup(mq7pin, gpio.DIR_OUT, on);
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
@@ -29,7 +29,7 @@ function on() {
     // }
 
     setTimeout(function() {
-        gpio.write(pin, 1, off);
+        gpio.write(mq7pin, 1, off);
         console.log("ON");
         count += 1;
     }, onDelay);
@@ -37,7 +37,7 @@ function on() {
 
 function off() {
     setTimeout(function() {
-        gpio.write(pin, 0, on);
+        gpio.write(mq7pin, 0, on);
         console.log("OFF");
     }, offDelay);
 }
