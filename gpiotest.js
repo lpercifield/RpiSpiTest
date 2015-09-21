@@ -36,7 +36,7 @@ function on() {
 function off() {
     setTimeout(function() {
         gpio.write(amPin, 0, on);
-    }, off);
+    }, on);
 }
 // var getADC = function(channel){
 //   var spiData =  new Buffer([1,(8+channel) << 4,0]);
