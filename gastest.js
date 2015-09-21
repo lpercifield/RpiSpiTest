@@ -1,19 +1,49 @@
-ADC = require 'adc-pi-spi'
-options =
-    tolerance: 10       #default = 10
-    pollInterval: 200   #default = 200
-    channels: [0,1] #default = [0]
+var gpio = require('rpi-gpio');
+var SPI = require('spi');
 
-adc=new ADC('/dev/spidev0.0', options)
+var mq7pin   = 24;
+var onDelay = 60000;
+var offDelay = 90000;
+var count = 0;
+var max   = 3;
 
-adc.on 'change', (channel, value)->
-    console.log 'channel ', channel, 'is now', value
+//gpio.setup(pin, gpio.DIR_OUT, on);
 
-process.on 'SIGTERM', () ->
-    adc.close()
-
-process.on 'SIGINT', () ->
-    adc.close()
-
-process.on 'exit', () ->
-    adc.close()
+var spi = new SPI.Spi('/dev/spidev0.0', {
+    'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
+    'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
+  }, function(s){
+    s.maxSpeed(1000000);
+    s.open();
+  });
+setInterval(function(){
+  getADC(0);
+  getADC(1);
+},500);
+// function on() {
+//     // if (count >= max) {
+//     //     gpio.destroy(function() {
+//     //         console.log('Closed pins, now exit');
+//     //     });
+//     //     return;
+//     // }
+//
+//     setTimeout(function() {
+//         gpio.write(pin, 1, off);
+//         count += 1;
+//     }, onDelay);
+// }
+//
+// function off() {
+//     setTimeout(function() {
+//         gpio.write(pin, 0, on);
+//     }, offDelay);
+// }
+var getADC = function(channel){
+  var spiData =  new Buffer([1,(8+channel) << 4,0]);
+  var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
+  spi.transfer(spiData, rxbuf, function(device, buf) {
+    var ret=((buf[1] & 3) << 8) + buf[2];
+    console.log("Channel " +channel +": " +ret);
+  });
+}

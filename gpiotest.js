@@ -43,6 +43,7 @@ var getADC = function(channel){
   var spiData =  new Buffer([1,(8+channel) << 4,0]);
   var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
   spi.transfer(spiData, rxbuf, function(device, buf) {
-    console.log("Channel " +channel +": " +buf.readUInt16BE(0));
+    var ret=((buf[1] & 3) << 8) + buf[2];
+    console.log("Channel " +channel +": " +ret);
   });
 }
