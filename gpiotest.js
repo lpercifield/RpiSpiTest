@@ -6,7 +6,7 @@ var on = 2000;
 var count = 0;
 var max   = 3;
 
-gpio.setup(amPin, gpio.DIR_OUT,function(){gpio.write(amPin, 1, on);});
+gpio.setup(amPin, gpio.DIR_OUT,on);
 
 function on() {
     if (count >= max) {
@@ -17,15 +17,21 @@ function on() {
     }
 
     setTimeout(function() {
-        gpio.write(amPin, true, off);
+      gpio.write(amPin, true, function(err) {
+        if (err) throw err;
+        console.log('Written to pin');
         console.log("ON");
         count += 1;
+      });
     }, on);
 }
 
 function off() {
     setTimeout(function() {
-        gpio.write(amPin, false, on);
+      gpio.write(amPin, false, function(err) {
+        if (err) throw err;
+        console.log('Written to pin');
         console.log("OFF");
+      });
     }, on);
 }
