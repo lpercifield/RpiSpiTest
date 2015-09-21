@@ -1,7 +1,7 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
 
-var amPin = 22;
+var amPin = 15;
 var on = 2000;
 var count = 0;
 var max   = 3;

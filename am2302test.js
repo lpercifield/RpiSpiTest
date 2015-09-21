@@ -1,7 +1,7 @@
 var gpio = require('rpi-gpio');
 var sensorLib = require('node-dht-sensor');
-var AM_PIN = 17;
-var AM_RESET_PIN = 22;
+var AM_PIN = 11;
+var AM_RESET_PIN = 15;
 
 console.log("before gpio setup");
 //gpio.setup(AM_PIN, gpio.DIR_OUT);
