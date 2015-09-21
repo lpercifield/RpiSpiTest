@@ -6,7 +6,7 @@ var on = 2000;
 var count = 0;
 var max   = 3;
 
-gpio.setup(amPin, gpio.DIR_OUT, function(){gpio.write(amPin, 1, on);});
+gpio.setup(amPin, gpio.DIR_OUT, function(){gpio.write(amPin, true, on);});
 
 // var spi = new SPI.Spi('/dev/spidev0.0', {
 //     'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
@@ -28,7 +28,7 @@ function on() {
     }
 
     setTimeout(function() {
-        gpio.write(amPin, 1, off);
+        gpio.write(amPin, true, off);
         console.log("ON");
         count += 1;
     }, on);
@@ -36,7 +36,7 @@ function on() {
 
 function off() {
     setTimeout(function() {
-        gpio.write(amPin, 0, on);
+        gpio.write(amPin, false, on);
         console.log("OFF");
     }, on);
 }
