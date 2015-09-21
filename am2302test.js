@@ -8,7 +8,7 @@ gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, amReset);
 
 var sensor = {
     initialize: function () {
-        return sensorLib.initialize(22, 4);
+        return sensorLib.initialize(22, AM_PIN);
     },
     read: function () {
         var readout = sensorLib.read();
@@ -21,6 +21,7 @@ var sensor = {
 };
 
 var amReset = function(){
+  console.log("Starting AMRESET")
   gpio.write(AM_RESET_PIN,0,function(err){
     if (err) throw err;
     console.log('RESETTING AM2302');
