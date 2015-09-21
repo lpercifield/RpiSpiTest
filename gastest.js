@@ -31,6 +31,9 @@ function on() {
     // }
 
     setTimeout(function() {
+        console.log("-----READING BEFORE ON-----")
+        getADC(0);
+        getADC(1);
         gpio.write(mq7pin, 1, off);
         console.log("ON");
         // if(burnIn){
@@ -39,17 +42,14 @@ function on() {
         //   onDelay = 60000;
         // }
         count += 1;
-    }, onDelay);
+    }, offDelay);
 }
 
 function off() {
     setTimeout(function() {
-        console.log("-----READING BEFORE OFF-----")
-        getADC(0);
-        getADC(1);
         gpio.write(mq7pin, 0, on);
         console.log("OFF");
-    }, offDelay);
+    }, onDelay);
 }
 var getADC = function(channel){
   var spiData =  new Buffer([1,(8+channel) << 4,0]);

@@ -1,5 +1,5 @@
-var sensorLib = require('node-dht-sensor');
 var gpio = require('rpi-gpio');
+var sensorLib = require('node-dht-sensor');
 var AM_PIN = 17;
 var AM_RESET_PIN = 22;
 
