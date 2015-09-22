@@ -22,6 +22,7 @@ cp.exec(cmd2,function(error,stdout,stderr){
     console.log("wvdialres: " + wvdialres.toString() + " iccres: " + iccres.toString());
   }
   if (stderr){
+    console.log(stderr);
     var search = "^AT\\+CGSN\\n(\\d+)\\n";
     var search2 = "\^ICCID: \"(\\d+)\"";
     var wvdialres = stderr.match(search);
