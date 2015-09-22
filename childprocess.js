@@ -1,6 +1,6 @@
 var cp = require("child_process");
 var cmd = "/usr/bin/lsusb | /bin/egrep Huawei";
-var cmd2 = "/usr/bin/wvdial IMEI; exit 0";
+var cmd2 = "wvdial IMEI; exit 0";
 cp.exec(cmd,function(error,stdout,stderr){
   if (error) throw error;
   if (stdout) console.log(stdout);
