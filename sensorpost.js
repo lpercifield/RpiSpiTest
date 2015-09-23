@@ -25,7 +25,8 @@ function on() {
         var mq7 = getADC(0);
         var mq135 = getADC(1);
         gpio.write(mq7pin, 1, off);
-
+        var json = {"MQ7":mq7,"MQ135":mq135};
+        sendPost(json,"air");
         console.log("ON");
         // if(burnIn){
         //   onDelay = 43200000;
@@ -51,9 +52,9 @@ var getADC = function(channel){
     console.log("Channel " +channel +": " +ret);
   });
 }
-var sendPost = function(jsonData){
+var sendPost = function(jsonData,path){
   request({
-      url: 192.168.2.210:1880,
+      url: "http://192.168.2.210:1880/"+path,
       method: "POST",
       json: jsonData
   }, function (error, response, body) {
@@ -63,8 +64,8 @@ var sendPost = function(jsonData){
   else {
 
       console.log("error: " + error)
-      console.log("response.statusCode: " + response.statusCode)
-      console.log("response.statusText: " + response.statusText)
+      // console.log("response.statusCode: " + response.statusCode)
+      // console.log("response.statusText: " + response.statusText)
   }
 });
 }
