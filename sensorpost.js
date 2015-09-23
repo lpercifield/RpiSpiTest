@@ -91,9 +91,13 @@ var sensor = {
         for (var a in this.sensors) {
             var b = sensorLib.readSpec(this.sensors[a].type, this.sensors[a].pin);
             readingnumber++;
+            var temp = b.temperature.toFixed(1);
+            var humidity = b.humidity.toFixed(1);
             console.log("Reading Number: "+ readingnumber+" " +this.sensors[a].name + ": " +
-              b.temperature.toFixed(1) + "C, " +
-              b.humidity.toFixed(1) + "%" + " Errors: " + b.errors + " isValid: " + b.isValid);
+              temp + "C, " +
+              humidity + "%" + " Errors: " + b.errors + " isValid: " + b.isValid);
+            var json = {"temp":temp,"humidity":humidity};
+            sendPost(json,"temp");
         }
     }
 };
