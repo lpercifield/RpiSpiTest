@@ -11,8 +11,8 @@ var sendPost = function(jsonData,path){
   else {
 
       console.log("error: " + error)
-      console.log("response.statusCode: " + response.statusCode)
-      console.log("response.statusText: " + response.statusText)
+      // console.log("response.statusCode: " + response.statusCode)
+      // console.log("response.statusText: " + response.statusText)
   }
 });
 }
