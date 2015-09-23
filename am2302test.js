@@ -31,7 +31,7 @@ console.log("after gpio setup");
 var sensor = {
     sensors: [ {
         name: "Indoor",
-        type: 23,
+        type: 22,
         pin: AM_PIN
     }],
     read: function() {
@@ -69,7 +69,9 @@ var startReadings = function(){
       sensor.read();
     } catch (e) {
       console.log(e)
-    } 
+      clearInterval(readingInterval);
+      amReset();
+    }
     // if(!sensorLib.initialized){
     //     console.log("inialize sensor")
     //   if (sensor.initialize()) {
