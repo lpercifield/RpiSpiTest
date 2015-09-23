@@ -1,7 +1,10 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
 var request = require('request');
+var sensorLib = require('node-dht-sensor');
 
+var AM_PIN = 17;
+var AM_RESET_PIN = 15;
 var mq7pin   = 18;
 var onDelay = 60000;
 var offDelay = 90000;
@@ -10,6 +13,11 @@ var max   = 3;
 var burnIn = true;
 
 gpio.setup(mq7pin, gpio.DIR_OUT,function(){gpio.write(mq7pin, 1, on);});
+gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, function(err){
+  if (err) throw err;
+  console.log("Calling amreset");
+  amReset();
+});
 
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
@@ -70,6 +78,47 @@ var sendPost = function(jsonData,path){
       // console.log("response.statusText: " + response.statusText)
   }
 });
+}
+var sensor = {
+    initialize: function () {
+        return sensorLib.initialize(22, AM_PIN);
+    },
+    read: function () {
+        var readout = sensorLib.read();
+        var temp = readout.temperature.toFixed(2);
+        var humidity = readout.humidity.toFixed(2);
+        var tempJson = {"temp":parseFloat(temp),"humidity":parseFloat(humidity)};
+        sendPost(tempJson,"temp");
+        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+            'humidity: ' + readout.humidity.toFixed(2) + '%');
+        // setTimeout(function () {
+        //     sensor.read();
+        // }, 2000);
+    }
+};
+
+var amReset = function(){
+  console.log("Starting AMRESET")
+  gpio.write(AM_RESET_PIN,1,function(err){
+    if (err) throw err;
+    console.log('RESETTING AM2302');
+  });
+  setTimeout(function(){
+    gpio.write(AM_RESET_PIN,1,function(err){
+      if (err) throw err;
+      console.log('Power On AM2302');
+      setTimeout(startReadings,5000);
+    });
+  },5000);
+}
+var startReadings = function(){
+  setInterval(function(){
+    if (sensor.initialize()) {
+        sensor.read();
+    } else {
+        console.warn('Failed to initialize sensor');
+    }
+  },60000);
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
