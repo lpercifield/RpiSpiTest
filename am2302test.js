@@ -31,7 +31,7 @@ var sensor = {
 
 var amReset = function(){
   console.log("Starting AMRESET")
-  gpio.write(AM_RESET_PIN,1,function(err){
+  gpio.write(AM_RESET_PIN,0,function(err){
     if (err) throw err;
     console.log('RESETTING AM2302');
   });
@@ -51,6 +51,7 @@ var startReadings = function(){
       } else {
           console.warn('Failed to initialize sensor');
           clearInterval(readingInterval);
+          amReset();
       }
     }else{
       sensor.read();
