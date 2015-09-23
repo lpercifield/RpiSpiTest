@@ -72,6 +72,5 @@ var sendPost = function(jsonData,path){
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
-gpio.write(mq7pin, 1, off);
 var json = {"MQ7":mq7,"MQ135":mq135};
 sendPost(json,"air");
