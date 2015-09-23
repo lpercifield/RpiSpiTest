@@ -14,20 +14,6 @@ gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, function(err){
 });
 console.log("after gpio setup");
 
-// var sensor = {
-//     initialize: function () {
-//         return sensorLib.initialize(22, AM_PIN);
-//     },
-//     read: function () {
-//         var readout = sensorLib.read();
-//         readingnumber++;
-//         console.log("Reading Number: "+ readingnumber+' Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
-//             'humidity: ' + readout.humidity.toFixed(2) + '%');
-//         // setTimeout(function () {
-//         //     sensor.read();
-//         // }, 2000);
-//     }
-// };
 var sensor = {
     sensors: [ {
         name: "Indoor",
@@ -42,9 +28,6 @@ var sensor = {
               b.temperature.toFixed(1) + "C, " +
               b.humidity.toFixed(1) + "%" + " Errors: " + b.errors + " isValid: " + b.isValid);
         }
-        // setTimeout(function() {
-        //     sensor.read();
-        // }, 2000);
     }
 };
 
@@ -72,17 +55,5 @@ var startReadings = function(){
       clearInterval(readingInterval);
       amReset();
     }
-    // if(!sensorLib.initialized){
-    //     console.log("inialize sensor")
-    //   if (sensor.initialize()) {
-    //       sensor.read();
-    //   } else {
-    //       console.warn('Failed to initialize sensor');
-    //       clearInterval(readingInterval);
-    //       amReset();
-    //   }
-    // }else{
-    //   sensor.read();
-    // }
   },5000);
 }

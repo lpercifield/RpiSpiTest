@@ -5,6 +5,7 @@ var sensorLib = require('node-dht-sensor');
 
 var AM_PIN = 17;
 var AM_RESET_PIN = 15;
+var amReadingInterval;
 var mq7pin   = 18;
 var onDelay = 60000;
 var offDelay = 90000;
@@ -80,26 +81,25 @@ var sendPost = function(jsonData,path){
 });
 }
 var sensor = {
-    initialize: function () {
-        return sensorLib.initialize(22, AM_PIN);
-    },
-    read: function () {
-        var readout = sensorLib.read();
-        var temp = readout.temperature.toFixed(2);
-        var humidity = readout.humidity.toFixed(2);
-        var tempJson = {"temp":parseFloat(temp),"humidity":parseFloat(humidity)};
-        sendPost(tempJson,"temp");
-        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
-            'humidity: ' + readout.humidity.toFixed(2) + '%');
-        // setTimeout(function () {
-        //     sensor.read();
-        // }, 2000);
+    sensors: [ {
+        name: "Indoor",
+        type: 22,
+        pin: AM_PIN
+    }],
+    read: function() {
+        for (var a in this.sensors) {
+            var b = sensorLib.readSpec(this.sensors[a].type, this.sensors[a].pin);
+            readingnumber++;
+            console.log("Reading Number: "+ readingnumber+" " +this.sensors[a].name + ": " +
+              b.temperature.toFixed(1) + "C, " +
+              b.humidity.toFixed(1) + "%" + " Errors: " + b.errors + " isValid: " + b.isValid);
+        }
     }
 };
 
 var amReset = function(){
   console.log("Starting AMRESET")
-  gpio.write(AM_RESET_PIN,1,function(err){
+  gpio.write(AM_RESET_PIN,0,function(err){
     if (err) throw err;
     console.log('RESETTING AM2302');
   });
@@ -112,13 +112,15 @@ var amReset = function(){
   },5000);
 }
 var startReadings = function(){
-  setInterval(function(){
-    if (sensor.initialize()) {
-        sensor.read();
-    } else {
-        console.warn('Failed to initialize sensor');
+  amReadingInterval = setInterval(function(){
+    try {
+      sensor.read();
+    } catch (e) {
+      console.log(e)
+      clearInterval(amReadingInterval);
+      amReset();
     }
-  },60000);
+  },5000);
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
