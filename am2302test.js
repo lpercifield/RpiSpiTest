@@ -40,7 +40,7 @@ var sensor = {
             readingnumber++;
             console.log("Reading Number: "+ readingnumber+" " +this.sensors[a].name + ": " +
               b.temperature.toFixed(1) + "C, " +
-              b.humidity.toFixed(1) + "%" + " Errors: " + b.errors);
+              b.humidity.toFixed(1) + "%" + " Errors: " + b.errors + " isValid: " + b.isValid);
         }
         // setTimeout(function() {
         //     sensor.read();
