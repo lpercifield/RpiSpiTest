@@ -125,7 +125,7 @@ var startReadings = function(){
       clearInterval(amReadingInterval);
       amReset();
     }
-  },5000);
+  },60000);
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
