@@ -42,10 +42,14 @@ var amReset = function(){
 }
 var startReadings = function(){
   setInterval(function(){
-    if (sensor.initialize()) {
-        sensor.read();
-    } else {
-        console.warn('Failed to initialize sensor');
+    if(!sensor.initialized){
+      if (sensor.initialize()) {
+          sensor.read();
+      } else {
+          console.warn('Failed to initialize sensor');
+      }
+    }else{
+      sensor.read();
     }
   },5000);
 }
