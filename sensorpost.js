@@ -50,6 +50,7 @@ var getADC = function(channel){
     //var ret=((buf[1] & 3) << 8) + buf[2];
     var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
     console.log("Channel " +channel +": " +ret);
+    return ret;
   });
 }
 var sendPost = function(jsonData,path){
