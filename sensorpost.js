@@ -50,8 +50,8 @@ var getADC = function(channel){
     //var ret=((buf[1] & 3) << 8) + buf[2];
     var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
     console.log("Channel " +channel +": " +ret);
-    return ret;
   });
+  return ret;
 }
 var sendPost = function(jsonData,path){
   request({
@@ -72,5 +72,5 @@ var sendPost = function(jsonData,path){
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
-var json = {"MQ7":mq7,"MQ135":mq135};
+var json = {"MQ7":123,"MQ135":456};
 sendPost(json,"air");
