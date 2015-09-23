@@ -6,6 +6,7 @@ var sensorLib = require('node-dht-sensor');
 var AM_PIN = 17;
 var AM_RESET_PIN = 15;
 var amReadingInterval;
+var readingnumber = 0;
 var mq7pin   = 18;
 var onDelay = 60000;
 var offDelay = 90000;
