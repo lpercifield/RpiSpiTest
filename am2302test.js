@@ -65,7 +65,11 @@ var amReset = function(){
 }
 var startReadings = function(){
   readingInterval = setInterval(function(){
-    sensor.read();
+    try {
+      sensor.read();
+    } catch (e) {
+      console.log(e)
+    } 
     // if(!sensorLib.initialized){
     //     console.log("inialize sensor")
     //   if (sensor.initialize()) {
