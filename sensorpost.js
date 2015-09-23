@@ -1,5 +1,6 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
+var request = require('request');
 
 var mq7pin   = 18;
 var onDelay = 60000;
@@ -24,6 +25,7 @@ function on() {
         var mq7 = getADC(0);
         var mq135 = getADC(1);
         gpio.write(mq7pin, 1, off);
+
         console.log("ON");
         // if(burnIn){
         //   onDelay = 43200000;
@@ -48,4 +50,21 @@ var getADC = function(channel){
     var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
     console.log("Channel " +channel +": " +ret);
   });
+}
+var sendPost = function(jsonData){
+  request({
+      url: 192.168.2.210:1880,
+      method: "POST",
+      json: jsonData
+  }, function (error, response, body) {
+  if (!error && response.statusCode === 200) {
+      console.log(body)
+  }
+  else {
+
+      console.log("error: " + error)
+      console.log("response.statusCode: " + response.statusCode)
+      console.log("response.statusText: " + response.statusText)
+  }
+});
 }
