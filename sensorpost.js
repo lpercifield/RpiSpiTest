@@ -73,5 +73,5 @@ var sendPost = function(jsonData,path){
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
-var json = {"MQ7":123,"MQ135":456};
+var json = {"MQ7":parseInt(mq7),"MQ135":parseInt(mq135)};
 sendPost(json,"air");
