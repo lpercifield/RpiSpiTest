@@ -2,6 +2,8 @@ var gpio = require('rpi-gpio');
 var sensorLib = require('node-dht-sensor');
 var AM_PIN = 17;
 var AM_RESET_PIN = 15;
+var readingnumber = 0;
+var readingInterval;
 
 console.log("before gpio setup");
 //gpio.setup(AM_PIN, gpio.DIR_OUT);
@@ -18,7 +20,8 @@ var sensor = {
     },
     read: function () {
         var readout = sensorLib.read();
-        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+        readingnumber++;
+        console.log("Reading Number: "+ readingnumber+' Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
             'humidity: ' + readout.humidity.toFixed(2) + '%');
         // setTimeout(function () {
         //     sensor.read();
@@ -41,12 +44,13 @@ var amReset = function(){
   },5000);
 }
 var startReadings = function(){
-  setInterval(function(){
+  readingInterval = setInterval(function(){
     if(!sensor.initialized){
       if (sensor.initialize()) {
           sensor.read();
       } else {
           console.warn('Failed to initialize sensor');
+          clearInterval(readingInterval);
       }
     }else{
       sensor.read();
