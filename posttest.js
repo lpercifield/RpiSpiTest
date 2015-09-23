@@ -1,7 +1,7 @@
 var request = require('request');
 var sendPost = function(jsonData,path){
   request({
-      url: 192.168.2.210:1880/path,
+      url: "192.168.2.210:1880/"+path,
       method: "POST",
       json: jsonData
   }, function (error, response, body) {
