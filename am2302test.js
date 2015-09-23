@@ -31,7 +31,7 @@ console.log("after gpio setup");
 var sensor = {
     sensors: [ {
         name: "Indoor",
-        type: 22,
+        type: 23,
         pin: AM_PIN
     }],
     read: function() {
