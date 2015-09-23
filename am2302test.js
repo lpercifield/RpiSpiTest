@@ -56,7 +56,7 @@ var amReset = function(){
     console.log('RESETTING AM2302');
   });
   setTimeout(function(){
-    gpio.write(AM_RESET_PIN,1,function(err){
+    gpio.write(AM_RESET_PIN,0,function(err){
       if (err) throw err;
       console.log('Power On AM2302');
       setTimeout(startReadings,5000);
