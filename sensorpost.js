@@ -19,6 +19,11 @@ var spi = new SPI.Spi('/dev/spidev0.0', {
     s.maxSpeed(1000000);
     s.open();
   });
+  var mq7 = getADC(0);
+  var mq135 = getADC(1);
+  gpio.write(mq7pin, 1, off);
+  var json = {"MQ7":mq7,"MQ135":mq135};
+  sendPost(json,"air");
 function on() {
     setTimeout(function() {
         console.log("-----READING BEFORE ON-----")
