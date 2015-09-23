@@ -15,18 +15,19 @@ cp.exec(huawei,function(error,stdout,stderr){
 cp.exec(cmd2,function(error,stdout,stderr){
   if (error) throw error;
   if (stdout){
-    var search = "^AT\\+CGSN\\n(\\d+)\\n";
-    var search2 = "\^ICCID: \"(\\d+)\"";
-    var wvdialres = stdout.match(search);
-    var iccres = stdout.match(search2);
-    console.log("wvdialres: " + wvdialres.toString() + " iccres: " + iccres.toString());
+    console.log(stderr);
+    var wvdialresRX= /\nAT\+CGSN\n(\d+)\n/
+    var iccresRX = /\^ICCID: (\d+)\n/;
+    var wvdialres = stdout.match(wvdialresRX);
+    var iccres = stdout.match(iccresRX);
+    console.log("wvdialres: " + wvdialres[1] + " iccres: " + iccres[1]);
   }
   if (stderr){
     console.log(stderr);
-    var search = "^AT\\+CGSN\\n(\\d+)\\n";
-    var search2 = "\^ICCID: \"(\\d+)\"";
-    var wvdialres = stderr.match(search);
-    var iccres = stderr.match(search2);
-    console.log("wvdialres: " + wvdialres.toString() + " iccres: " + iccres.toString());
+    var wvdialresRX= /\nAT\+CGSN\n(\d+)\n/
+    var iccresRX = /\^ICCID: (\d+)\n/;
+    var wvdialres = stderr.match(wvdialresRX);
+    var iccres = stderr.match(iccresRX);
+    console.log("wvdialres: " + wvdialres[1] + " iccres: " + iccres[1]);
   }// throw stderr;
 });
