@@ -57,5 +57,6 @@ int main(){
 unsigned long int GetMic(void){
 	unsigned char spiData [3]={0x00,0x00,0x00};
 	wiringPiSPIDataRW(1, spiData, 3);
-	return (  ((spiData [0]<<16)&0x0F0000) | ((spiData[1]<<8)&0xFF00) | (spiData[2]&0xFF) );
+	//return (  ((spiData [0]<<16)&0x0F0000) | ((spiData[1]<<8)&0xFF00) | (spiData[2]&0xFF) );
+	return ( (spiData [0] << 11) | (spiData [1] << 3 ) | (spiData [2] >> 5 ));
 }
