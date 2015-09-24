@@ -7,6 +7,7 @@ unsigned long int GetMic(void);
 unsigned long int samples[DEPTH];
 unsigned long int sum;
 unsigned long int sample;
+unsigned long int sampleCount = 0;
 unsigned long int signalMax = 0;
 unsigned long int signalMin = 32768;
 unsigned long int peakToPeak;
@@ -35,6 +36,7 @@ int main(){
 		if(now>(prevSample+3000)){
 			sample = GetMic();
 		    //printf("%d\n",sample);
+			sampleCount++;
 		  prevSample=now;
 			if (sample > signalMax){
 				signalMax = sample;  // save just the max levels
@@ -45,9 +47,13 @@ int main(){
 		if(now>(prevAverage+30000)){
 			peakToPeak = 0;
 			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
-			printf("%d\n",peakToPeak);
+			// if(peakToPeak>0){
+			// 	printf("%d\n",peakToPeak);
+			// }
+			printf("%d\n",sampleCount);
 			signalMax = 0;
 			signalMin = 32768;
+			sampleCount = 0;
 			prevAverage = now;
 		}
 	}//printf("%s\n", );
