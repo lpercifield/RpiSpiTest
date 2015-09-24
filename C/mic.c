@@ -42,7 +42,7 @@ int main(){
 				signalMin = sample;  // save just the min levels
 			}
 		}// sample
-		if(now>(prevSample+300000)){
+		if(now>(prevAverage+300000)){
 			peakToPeak = 0;
 			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
 			printf("%d\n",peakToPeak);
