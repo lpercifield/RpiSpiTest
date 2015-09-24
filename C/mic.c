@@ -32,7 +32,7 @@ int main(){
 	while(1){
 		//now=clock()*100/CLOCKS_PER_SEC;
 		now=clock();
-		if(now>(prevSample+30000)){
+		if(now>(prevSample+3000)){
 			sample = GetMic();
 		    //printf("%d\n",sample);
 		  prevSample=now;
@@ -42,7 +42,7 @@ int main(){
 				signalMin = sample;  // save just the min levels
 			}
 		}// sample
-		if(now>(prevAverage+300000)){
+		if(now>(prevAverage+30000)){
 			peakToPeak = 0;
 			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
 			printf("%d\n",peakToPeak);
