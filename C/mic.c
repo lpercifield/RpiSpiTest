@@ -3,17 +3,19 @@
 
 static int myFd ;
 
-long int GetMic(void);
+unsigned long int GetMic(void);
 unsigned long int samples[DEPTH];
 unsigned long int sum;
+unsigned long int sample;
 unsigned long int signalMax = 0;
 unsigned long int signalMin = 65536;
+unsigned long int peakToPeak;
 double noice;
 
 
 int main(){
 	unsigned char ShiftCounter,i;
-	clock_t now=0, prev=0;
+	clock_t now=0, prevSample=0, prevAverage = 0;
 	printf("Hello, I'm microphone!\n");
 	if(wiringPiSetupGpio()==-1){
         exit(1);
@@ -30,33 +32,30 @@ int main(){
 	while(1){
 		//now=clock()*100/CLOCKS_PER_SEC;
 		now=clock();
-		if(now>(prev+300000)){
-		    printf("%d\n",GetMic());
-		  prev=now;
-			// sum=0;
-      // for(ShiftCounter=0;ShiftCounter<DEPTH-1;ShiftCounter++){
-			//    samples[ShiftCounter]=samples[ShiftCounter+1];
-			//    sum+=samples[ShiftCounter];
-			// }
-			// samples[DEPTH-1]=(GetMic()+samples[DEPTH-2]+samples[DEPTH-3]+samples[DEPTH-4]+samples[DEPTH-5])/5;
-			// sum+=samples[DEPTH-1];
-			// sum/=DEPTH;
-			// noice=10*log10f(abs(((double)sum-(double)samples[DEPTH-1])/100));
-		  //   if(noice>0){
-			//     //printf("%f\n",noice);
-			// 	for(i=0;i<(int)noice;i++){
-			// 		printf(" ");
-			// 	}
-			// 	printf("*\n");
-			// }
+		if(now>(prevSample+30000)){
+			sample = GetMic();
+		    //printf("%d\n",sample);
+		  prevSample=now;
+			if (sample > signalMax){
+				signalMax = sample;  // save just the max levels
+			}else if (sample < signalMin){
+				signalMin = sample;  // save just the min levels
+			}
+		}// sample
+		if(now>(prevSample+300000)){
+			peakToPeak = 0;
+			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
+			printf("%d\n",peakToPeak);
+			signalMax = 0;
+			signalMin = 65536;
+			prevAverage = now;
 		}
-
 	}//printf("%s\n", );
 	close(myFd);
 	return(0);
 }
 
-long int GetMic(void){
+unsigned long int GetMic(void){
 	unsigned char spiData [3]={0x00,0x00,0x00};
 	wiringPiSPIDataRW(1, spiData, 3);
 	//return (  ((spiData [0]<<16)&0x0F0000) | ((spiData[1]<<8)&0xFF00) | (spiData[2]&0xFF) );
