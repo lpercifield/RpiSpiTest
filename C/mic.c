@@ -44,7 +44,7 @@ int main(){
 				signalMin = sample;  // save just the min levels
 			}
 		}// sample
-		if(now>(prevAverage+30000)){
+		if(now>(prevAverage+300000)){
 			peakToPeak = 0;
 			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
 			// if(peakToPeak>0){
