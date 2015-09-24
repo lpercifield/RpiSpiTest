@@ -28,7 +28,7 @@ int main(){
 	while(1){
 		//now=clock()*100/CLOCKS_PER_SEC;
 		now=clock();
-		if(now>(prev+3000)){
+		if(now>(prev+300000)){
 		    printf("%d\n",GetMic());
 		  prev=now;
 			// sum=0;
