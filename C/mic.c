@@ -8,7 +8,7 @@ unsigned long int samples[DEPTH];
 unsigned long int sum;
 unsigned long int sample;
 unsigned long int signalMax = 0;
-unsigned long int signalMin = 65536;
+unsigned long int signalMin = 32768;
 unsigned long int peakToPeak;
 double noice;
 
@@ -47,7 +47,7 @@ int main(){
 			peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
 			printf("%d\n",peakToPeak);
 			signalMax = 0;
-			signalMin = 65536;
+			signalMin = 32768;
 			prevAverage = now;
 		}
 	}//printf("%s\n", );
