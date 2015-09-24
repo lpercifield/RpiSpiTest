@@ -29,27 +29,27 @@ int main(){
 		//now=clock()*100/CLOCKS_PER_SEC;
 		now=clock();
 		if(now>(prev+3000)){
-		    //printf("%d\n",GetMic());
+		    printf("%d\n",GetMic());
 		  prev=now;
-			sum=0;
-      for(ShiftCounter=0;ShiftCounter<DEPTH-1;ShiftCounter++){
-			   samples[ShiftCounter]=samples[ShiftCounter+1];
-			   sum+=samples[ShiftCounter];
-			}
-			samples[DEPTH-1]=(GetMic()+samples[DEPTH-2]+samples[DEPTH-3]+samples[DEPTH-4]+samples[DEPTH-5])/5;
-			sum+=samples[DEPTH-1];
-			sum/=DEPTH;
-			noice=10*log10f(abs(((double)sum-(double)samples[DEPTH-1])/100));
-		    if(noice>0){
-			    //printf("%f\n",noice);
-				for(i=0;i<(int)noice;i++){
-					printf(" ");
-				}
-				printf("*\n");
-			}
+			// sum=0;
+      // for(ShiftCounter=0;ShiftCounter<DEPTH-1;ShiftCounter++){
+			//    samples[ShiftCounter]=samples[ShiftCounter+1];
+			//    sum+=samples[ShiftCounter];
+			// }
+			// samples[DEPTH-1]=(GetMic()+samples[DEPTH-2]+samples[DEPTH-3]+samples[DEPTH-4]+samples[DEPTH-5])/5;
+			// sum+=samples[DEPTH-1];
+			// sum/=DEPTH;
+			// noice=10*log10f(abs(((double)sum-(double)samples[DEPTH-1])/100));
+		  //   if(noice>0){
+			//     //printf("%f\n",noice);
+			// 	for(i=0;i<(int)noice;i++){
+			// 		printf(" ");
+			// 	}
+			// 	printf("*\n");
+			// }
 		}
 
-	}printf("%s\n", );
+	}//printf("%s\n", );
 	close(myFd);
 	return(0);
 }
