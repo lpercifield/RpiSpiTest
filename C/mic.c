@@ -3,7 +3,7 @@
 
 static int myFd ;
 
-unsigned long int GetMic(void);
+long int GetMic(void);
 unsigned long int samples[DEPTH];
 unsigned long int sum;
 unsigned long int signalMax = 0;
