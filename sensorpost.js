@@ -20,6 +20,7 @@ gpio.setup(AM_RESET_PIN, gpio.DIR_OUT, function(err){
   console.log("Calling amreset");
   amReset();
 });
+setTimeout(function(){burnIn = false},14400000);
 
 
 var spi = new SPI.Spi('/dev/spidev0.0', {
@@ -35,7 +36,7 @@ function on() {
         var mq7 = getADC(0);
         var mq135 = getADC(1);
         gpio.write(mq7pin, 1, off);
-        var json = {"MQ7":mq7,"MQ135":mq135};
+        var json = {"MQ7":mq7,"MQ135":mq135,burnin:burnIn};
         sendPost(json,"air");
         console.log("ON");
         // if(burnIn){
@@ -49,8 +50,12 @@ function on() {
 
 function off() {
     setTimeout(function() {
+      if(!burnIn){
         gpio.write(mq7pin, 0, on);
         console.log("OFF");
+      }else {
+        console.log("burning in");
+      }
     }, onDelay);
 }
 var getADC = function(channel){
