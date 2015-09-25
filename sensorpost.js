@@ -36,7 +36,7 @@ function on() {
         var mq7 = getADC(0);
         var mq135 = getADC(1);
         gpio.write(mq7pin, 1, off);
-        var json = {"MQ7":mq7,"MQ135":mq135,burnin:burnIn};
+        var json = {"MQ7":parseInt(mq7),"MQ135":parseInt(mq135),"burnin":burnIn};
         sendPost(json,"air");
         console.log("ON");
         // if(burnIn){
