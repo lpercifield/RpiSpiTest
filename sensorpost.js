@@ -134,5 +134,5 @@ var startReadings = function(){
 }
 var mq7 = getADC(0);
 var mq135 = getADC(1);
-var json = {"MQ7":parseInt(mq7),"MQ135":parseInt(mq135)};
+var json = {"MQ7":parseInt(mq7),"MQ135":parseInt(mq135),"burnin":burnIn};
 sendPost(json,"air");
