@@ -11,6 +11,7 @@ var timolo = new PythonShell('pi-timolo.py',options);
 
 timolo.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
+  console.log(message.hasOwnProperty(motion));
   console.log(message);
 });
 setTimeout(function(){
