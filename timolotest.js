@@ -33,7 +33,3 @@ PythonShell.run('pi-timolo.py', options, function (err, results) {
   // results is an array consisting of messages collected during execution
   console.log('results: %j', results);
 });
-PythonShell.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-  console.log(message);
-});
