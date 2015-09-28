@@ -74,6 +74,17 @@ def userMotionCodeHere(filename):
     return
 
 #-----------------------------------------------------------------------------------------------
+def userTimelapseCodeHere(filename):
+    # Users can put code here that needs to be run prior to taking timelapse images
+    # Eg Notify or activate something.
+
+    # User code goes here
+    timelapseJson = "{'timelapse':true,'file':"+filename+"}"
+    print(timelapseJson)
+
+    return
+
+#-----------------------------------------------------------------------------------------------
 def shut2Sec (shutspeed):
     shutspeedSec = shutspeed/float(SECONDS2MICRO)
     shutstring = str("%.3f sec") % ( shutspeedSec )
@@ -611,6 +622,7 @@ def Main():
                     showMessage("Main", msgStr)
                     imagePrefix = timelapsePrefix + imageNamePrefix
                     filename = getImageName(timelapsePath, imagePrefix, timelapseNumOn, timelapseNumCount)
+                    userTimelapseCodeHere(filename) # call user code before timelapse is captured
                     if daymode:
                         takeDayImage(filename)
                     else:
