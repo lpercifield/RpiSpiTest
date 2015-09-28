@@ -11,6 +11,18 @@
 progVer = "ver 2.8"
 
 import os
+# import remaining python libraries
+import sys
+import time
+import datetime
+import picamera
+import picamera.array
+import numpy as np
+import pyexiv2
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+from fractions import Fraction
 mypath=os.path.abspath(__file__)       # Find the full path of this python script
 baseDir=mypath[0:mypath.rfind("/")+1]  # get the path location only (excluding script name)
 baseFileName=mypath[mypath.rfind("/")+1:mypath.rfind(".")]
@@ -33,18 +45,7 @@ else:
     print("{'timolo':true}")
     sys.stdout.flush()
 
-# import remaining python libraries
-import sys
-import time
-import datetime
-import picamera
-import picamera.array
-import numpy as np
-import pyexiv2
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-from fractions import Fraction
+
 
 #==================================
 #      System Variables
