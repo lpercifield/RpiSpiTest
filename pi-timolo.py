@@ -70,7 +70,7 @@ def userMotionCodeHere(filename):
     # User code goes here
     motionJson = "{'motion':true,'file':"+filename+"}"
     print(motionJson)
-
+    sys.stdout.flush()
     return
 
 #-----------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ def userTimelapseCodeHere(filename):
     # User code goes here
     timelapseJson = "{'timelapse':true,'file':"+filename+"}"
     print(timelapseJson)
-
+    sys.stdout.flush()
     return
 
 #-----------------------------------------------------------------------------------------------
