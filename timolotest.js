@@ -1,8 +1,13 @@
 var PythonShell = require('python-shell');
-var timolo = new PythonShell('~/pi-timolo/pi-timolo.py');
+
 
 // sends a message to the Python script via stdin
 //pyshell.send('hello');
+var options = {
+  mode: 'json',
+  scriptPath: '/home/pi/pi-timolo'
+};
+var timolo = new PythonShell('pi-timolo.py',options);
 
 timolo.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
