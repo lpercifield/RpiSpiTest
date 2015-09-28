@@ -5,7 +5,6 @@ var PythonShell = require('python-shell');
 //pyshell.send('hello');
 var options = {
   mode: 'text',
-  pythonPath: 'usr/bin/python',
   scriptPath: '/home/pi/pi-timolo'
 };
 var timolo = new PythonShell('pi-timolo.py',options);
