@@ -30,7 +30,7 @@ if verbose:
     print("------------------------------ Loading Python Libraries --------------------------------------")
 else:
     #print("Note: verbose=False (Disabled) Set verbose=True to Display Detailed Messages.")
-    print("{'timolo':true}")
+    print('{"timolo":"true"}')
 
 
 # import remaining python libraries
@@ -72,7 +72,7 @@ def userMotionCodeHere(filename):
     # Eg Notify or activate something.
 
     # User code goes here
-    motionJson = "{'motion':true,'file':"+filename+"}"
+    motionJson = '{"motion":"true","file":"'+filename+'"}'
     print(motionJson)
     sys.stdout.flush()
     return
@@ -83,7 +83,7 @@ def userTimelapseCodeHere(filename):
     # Eg Notify or activate something.
 
     # User code goes here
-    timelapseJson = "{'timelapse':true,'file':"+filename+"}"
+    timelapseJson = '{"timelapse":"true","file":"'+filename+'"}'
     print(timelapseJson)
     sys.stdout.flush()
     return
