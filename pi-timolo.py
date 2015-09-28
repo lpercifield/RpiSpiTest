@@ -29,7 +29,9 @@ else:
 if verbose:
     print("------------------------------ Loading Python Libraries --------------------------------------")
 else:
-    print("Note: verbose=False (Disabled) Set verbose=True to Display Detailed Messages.")
+    #print("Note: verbose=False (Disabled) Set verbose=True to Display Detailed Messages.")
+    print("{'timolo':true}")
+    sys.stdout.flush()
 
 # import remaining python libraries
 import sys

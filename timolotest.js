@@ -4,7 +4,7 @@ var PythonShell = require('python-shell');
 // sends a message to the Python script via stdin
 //pyshell.send('hello');
 var options = {
-  mode: 'text',
+  mode: 'JSON',
   scriptPath: '/home/pi/pi-timolo'
 };
 var timolo = new PythonShell('pi-timolo.py',options);
