@@ -466,7 +466,7 @@ def getStreamImage(isDay):
 def getStreamPixAve(streamData):
     # Calculate the average pixel values for the specified stream (used for determining day/night or twilight conditions)
     pixAverage = int(np.average(streamData[...,1]))
-    lightJson = '{"light":"true","level":'+pixAverage+'}'
+    lightJson = '{"light":"true","level":'+str(pixAverage)+'}'
     print(lightJson)
     sys.stdout.flush()
     return pixAverage
