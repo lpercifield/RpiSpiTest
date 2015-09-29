@@ -46,7 +46,7 @@ from PIL import ImageFont
 from PIL import ImageDraw
 from fractions import Fraction
 
-#sys.stdout.flush()
+sys.stdout.flush()
 
 #==================================
 #      System Variables
