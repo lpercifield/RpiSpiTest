@@ -2,6 +2,7 @@ var cp = require("child_process");
 var ralink ="/usr/bin/lsusb | /bin/egrep Ralink";
 var huawei = "/usr/bin/lsusb | /bin/egrep Huawei";
 var cmd2 = "/usr/bin/wvdial IMEI; exit 0";
+
 cp.exec(ralink,function(error,stdout,stderr){
   if (error) throw error;
   if (stdout) console.log(stdout);
