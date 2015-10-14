@@ -15,7 +15,7 @@ var burnInTime = 14400000;
 
 
 exports.setup = function(gpio,spi){
-  module.exports.emit('ready');
+  exports.emit('ready');
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
