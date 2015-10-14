@@ -8,7 +8,7 @@ var count = 0;
 var max   = 3;
 
 
-gpio.setup(greenLed, gpio.DIR_OUT);
+gpio.setup(yellowLed, gpio.DIR_OUT);
 gpio.setup(redLed, gpio.DIR_OUT,on);
 
 function on() {
