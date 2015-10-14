@@ -9,7 +9,7 @@ exports.setup = function(gpio){
   _gpio.setup(redLed, _gpio.DIR_OUT);
 }
 function heartbeat(){
-  gpio.write(yellowLed, false);
+  _gpio.write(yellowLed, false);
   setTimeout(function() {
     _gpio.write(yellowLed, false, function(err) {
       if (err) throw err;
