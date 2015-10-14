@@ -2,7 +2,7 @@ var gpio = require('rpi-gpio');
 
 
 var greenLed = 38;
-var redLed = 39;
+var redLed = 40;
 var on = 2000;
 var count = 0;
 var max   = 3;
