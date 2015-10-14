@@ -11,7 +11,7 @@ exports.setup = function(gpio){
 function heartbeat(){
   gpio.write(yellowLed, false);
   setTimeout(function() {
-    gpio.write(yellowLed, false, function(err) {
+    _gpio.write(yellowLed, false, function(err) {
       if (err) throw err;
       off();
     });
@@ -19,7 +19,7 @@ function heartbeat(){
 }
 function off() {
     setTimeout(function() {
-      gpio.write(yellowLed, true, function(err) {
+      _gpio.write(yellowLed, true, function(err) {
         if (err) throw err;
         on();
       });
