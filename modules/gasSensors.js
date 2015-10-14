@@ -13,7 +13,7 @@ var sensorData = {};
 var burnInTime = 14400000;
 
 
-
+module.exports = events;
 
 exports.setup = function(gpio,spi){
   events.emit("ready");
@@ -69,4 +69,3 @@ var getADC = function(channel){
     //console.log("Channel " +channel +": " +ret);
   });
 }
-module.exports = events;
