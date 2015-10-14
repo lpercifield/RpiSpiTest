@@ -1,5 +1,5 @@
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('events').EventEmitter
+  , events = new EventEmitter();
 var _gpio;
 var _SPI;
 
@@ -11,15 +11,15 @@ var max   = 3;
 var burnIn = true;
 var sensorData = {};
 var burnInTime = 14400000;
-var self = this;
 
+exports.events = events;
 
 
 exports.setup = function(gpio,spi){
-  self.emit('ready');
+  events.emit("ready");
   _gpio = gpio;
   _SPI = spi;
-  _gpio.setup(mq7pin, gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
+  _gpio.setup(mq7pin, gpio.DIR_OUT,function(){gpio.write(mq7pin, 1, on);});
   var spi = new _SPI.Spi('/dev/spidev0.0', {
       'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
       'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
@@ -42,7 +42,7 @@ function on() {
         sensorData["mq7"] = mq7;
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
-        this.emit('ready');
+        events.emit('ready');
         _gpio.write(mq7pin, 1, off);
         //console.log("ON");
         // if(burnIn){
@@ -69,4 +69,3 @@ var getADC = function(channel){
     //console.log("Channel " +channel +": " +ret);
   });
 }
-util.inherits(self, EventEmitter);
