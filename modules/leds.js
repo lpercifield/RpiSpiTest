@@ -21,7 +21,7 @@ function off() {
     setTimeout(function() {
       _gpio.write(yellowLed, true, function(err) {
         if (err) throw err;
-        on();
+        heartbeat();
       });
     }, heartbeatOnTime);
 }
