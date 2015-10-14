@@ -69,4 +69,4 @@ var getADC = function(channel){
     //console.log("Channel " +channel +": " +ret);
   });
 }
-exports.events = events;
+module.exports = events;
