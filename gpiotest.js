@@ -1,13 +1,13 @@
 var gpio = require('rpi-gpio');
 
 
-var greenLed = 38;
-var redLed = 40;
+var greenLed = 21;
+var redLed = 20;
 var on = 2000;
 var count = 0;
 var max   = 3;
 
-gpio.setMode('mode_rpi');
+
 gpio.setup(greenLed, gpio.DIR_OUT);
 gpio.setup(redLed, gpio.DIR_OUT,on);
 
