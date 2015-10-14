@@ -13,7 +13,7 @@ tempSensor.setup(gpio,function(){
 
 gasSensors.on('ready', function() {
   console.log('gasSensors data is ready');
-  console.log(JSON.stringify(gasSensors.lastReading()));
+  //console.log(JSON.stringify(gasSensors.lastReading()));
 });
 
 mainInterval = setInterval(mainLoop,mainLoopTime);
