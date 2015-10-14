@@ -1,9 +1,9 @@
 var gpio = require('rpi-gpio');
 
 
-var greenLed = 21;
-var redLed = 20;
-var on = 2000;
+var greenLed = 38;
+var redLed = 40;
+var onTime = 2000;
 var count = 0;
 var max   = 3;
 
@@ -21,22 +21,24 @@ function on() {
 
     setTimeout(function() {
       gpio.write(greenLed, true, function(err) {
-        gpio.write(redLed,false);
+        //gpio.write(redLed,false);
         if (err) throw err;
         console.log('Written to pin');
         console.log("ON");
         count += 1;
+        off();
       });
-    }, on);
+    }, onTime);
 }
 
 function off() {
     setTimeout(function() {
       gpio.write(greenLed, false, function(err) {
-        gpio.write(redLed,true);
+        //gpio.write(redLed,true);
         if (err) throw err;
         console.log('Written to pin');
         console.log("OFF");
+        on();
       });
-    }, on);
+    }, onTime);
 }
