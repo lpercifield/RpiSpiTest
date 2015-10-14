@@ -64,14 +64,15 @@ var amReset = function(callback){
     });
   },5000);
 }
-var startReadings = function(){
-  readingInterval = setInterval(function(){
-    try {
-      sensor.read();
-    } catch (e) {
-      console.log(e)
-      clearInterval(readingInterval);
-      amReset();
-    }
-  },5000);
-}
+// TODO: Maybe remove this or maybe use a call back on interval if we dont want to us timer in main loop
+// var startReadings = function(){
+//   readingInterval = setInterval(function(){
+//     try {
+//       sensor.read();
+//     } catch (e) {
+//       console.log(e)
+//       clearInterval(readingInterval);
+//       amReset();
+//     }
+//   },5000);
+// }
