@@ -16,7 +16,7 @@ module.exports = new EventEmitter();
 exports.setup = function(gpio,spi){
   _gpio = gpio;
   _SPI = spi;
-  gpio.setup(mq7pin, gpio.DIR_OUT,function(){gpio.write(mq7pin, 1, on);});
+  _gpio.setup(mq7pin, gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
   var spi = new _SPI.Spi('/dev/spidev0.0', {
       'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
       'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
@@ -40,7 +40,7 @@ function on() {
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
         module.exports.emit('ready');
-        gpio.write(mq7pin, 1, off);
+        _gpio.write(mq7pin, 1, off);
         //console.log("ON");
         // if(burnIn){
         //   onDelay = 43200000;
@@ -53,7 +53,7 @@ function on() {
 
 function off() {
     setTimeout(function() {
-        gpio.write(mq7pin, 0, on);
+        _gpio.write(mq7pin, 0, on);
         console.log("OFF");
     }, onDelay);
 }
