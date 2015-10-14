@@ -15,7 +15,7 @@ function heartbeat(){
       if (err) throw err;
       off();
     });
-  }, heartbeatTime);
+  }, heartbeatDelayTime);
 }
 function off() {
     setTimeout(function() {
