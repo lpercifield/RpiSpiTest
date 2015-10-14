@@ -1,12 +1,14 @@
 var gpio = require('rpi-gpio');
-var SPI = require('spi');
 
-var amPin = 15;
+
+var greenLed = 38;
+var redLed = 39;
 var on = 2000;
 var count = 0;
 var max   = 3;
 
-gpio.setup(amPin, gpio.DIR_OUT,on);
+gpio.setup(greenLed, gpio.DIR_OUT,on);
+gpio.setup(redLed, gpio.DIR_OUT,on);
 
 function on() {
     if (count >= max) {
@@ -17,7 +19,8 @@ function on() {
     }
 
     setTimeout(function() {
-      gpio.write(amPin, true, function(err) {
+      gpio.write(greenLed, true, function(err) {
+        gpio.write(redLed,false);
         if (err) throw err;
         console.log('Written to pin');
         console.log("ON");
@@ -28,7 +31,8 @@ function on() {
 
 function off() {
     setTimeout(function() {
-      gpio.write(amPin, false, function(err) {
+      gpio.write(greenLed, false, function(err) {
+        gpio.write(redLed,true);
         if (err) throw err;
         console.log('Written to pin');
         console.log("OFF");
