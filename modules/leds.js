@@ -2,7 +2,7 @@ var _gpio,
   yellowLed = 40,
   redLed = 38,
   heartbeatDelayTime = 5000,
-  heartbeatOnTime = 250,
+  heartbeatOnTime = 250;
 exports.setup = function(gpio){
   _gpio = gpio;
   _gpio.setup(yellowLed, _gpio.DIR_OUT,heartbeat);
