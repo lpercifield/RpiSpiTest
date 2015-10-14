@@ -11,11 +11,12 @@ var max   = 3;
 var burnIn = true;
 var sensorData = {};
 var burnInTime = 14400000;
+var self = this;
 
 
 
 exports.setup = function(gpio,spi){
-  this.emit('ready');
+  self.emit('ready');
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
@@ -68,4 +69,4 @@ var getADC = function(channel){
     //console.log("Channel " +channel +": " +ret);
   });
 }
-util.inherits(this, EventEmitter);
+util.inherits(self, EventEmitter);
