@@ -1,4 +1,5 @@
-
+var EventEmitter = require('events'),
+events = new EventEmitter();
 var _gpio;
 var _SPI;
 var spiLocal;
