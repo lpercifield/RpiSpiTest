@@ -2,6 +2,7 @@ var EventEmitter = require('events'),
 events = new EventEmitter();
 var _gpio;
 var _SPI;
+var spiLocal;
 
 var mq7pin   = 18;
 var onDelay = 60000;
@@ -19,9 +20,9 @@ exports.setup = function(gpio,spi){
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
-  var spi = new _SPI.Spi('/dev/spidev0.0', {
-      'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
-      'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
+  spiLocal = new _SPI.Spi('/dev/spidev0.0', {
+      'mode': _SPI.MODE['MODE_0'],  // always set mode as the first option
+      'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(1000000);
       s.open();
@@ -62,7 +63,7 @@ function off() {
 var getADC = function(channel){
   var spiData =  new Buffer([1,(8+channel) << 4,0]);
   var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
-  _spi.transfer(spiData, rxbuf, function(device, buf) {
+  spiLocal.transfer(spiData, rxbuf, function(device, buf) {
     //var ret=((buf[1] & 3) << 8) + buf[2];
     var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
     console.log("Channel " +channel +": " +ret);
