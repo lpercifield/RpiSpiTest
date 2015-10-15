@@ -35,7 +35,7 @@ exports.lastReading = function(){
 
 function on() {
     setTimeout(function() {
-        console.log("-----READING BEFORE ON-----")
+        //console.log("-----READING BEFORE ON-----")
         var mq7 = getADC(0);
         var mq135 = getADC(1);
         sensorData["mq7"] = mq7;
@@ -62,9 +62,11 @@ function off() {
 var getADC = function(channel){
   var spiData =  new Buffer([1,(8+channel) << 4,0]);
   var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
-  spiLocal.transfer(spiData, rxbuf, function(device, buf) {
+  var ret;
+  spi.transfer(spiData, rxbuf, function(device, buf) {
     //var ret=((buf[1] & 3) << 8) + buf[2];
-    var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
+    ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
     //console.log("Channel " +channel +": " +ret);
   });
+  return ret;
 }
