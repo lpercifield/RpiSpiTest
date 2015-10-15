@@ -12,10 +12,10 @@ var burnIn = true;
 var sensorData = {};
 var burnInTime = 14400000;
 
-
+exports.events = events;
 
 exports.setup = function(gpio,spi){
-  process.emit('gasready');
+  events.emit('ready');
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
@@ -41,7 +41,7 @@ function on() {
         sensorData["mq7"] = mq7;
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
-        process.emit('gasready');
+        events.emit('ready');
         _gpio.write(mq7pin, 1, off);
         console.log("ON");
         // if(burnIn){
