@@ -7,7 +7,7 @@ var mainInterval;
 var mainLoopTime = 60000;
 
 leds.setup(gpio);
-gasSensors.setup(gpio,SPI);
+
 tempSensor.setup(gpio,function(){
   console.log("tempSensor ready");
 })
@@ -16,6 +16,7 @@ gasSensors.events.on('ready', function() {
   console.log('gasSensors data is ready');
   //console.log(JSON.stringify(gasSensors.lastReading()));
 });
+gasSensors.setup(gpio,SPI);
 
 mainInterval = setInterval(mainLoop,mainLoopTime);
 
