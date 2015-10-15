@@ -16,7 +16,6 @@ var burnInTime = 14400000;
 exports.events = events;
 
 exports.setup = function(gpio,spi){
-  events.emit('ready');
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
@@ -42,9 +41,9 @@ function on() {
         sensorData["mq7"] = mq7;
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
-        events.emit('ready');
+        events.emit('ready',sensorData);
         _gpio.write(mq7pin, 1, off);
-        console.log("ON");
+        //console.log("ON");
         // if(burnIn){
         //   onDelay = 43200000;
         // }else{
@@ -57,7 +56,7 @@ function on() {
 function off() {
     setTimeout(function() {
         _gpio.write(mq7pin, 0, on);
-        console.log("OFF");
+        //console.log("OFF");
     }, onDelay);
 }
 var getADC = function(channel){
@@ -66,6 +65,6 @@ var getADC = function(channel){
   spiLocal.transfer(spiData, rxbuf, function(device, buf) {
     //var ret=((buf[1] & 3) << 8) + buf[2];
     var ret = ((rxbuf [1]<<8)|rxbuf[2])&0x3FF;
-    console.log("Channel " +channel +": " +ret);
+    //console.log("Channel " +channel +": " +ret);
   });
 }

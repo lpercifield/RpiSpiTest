@@ -12,9 +12,9 @@ tempSensor.setup(gpio,function(){
   console.log("tempSensor ready");
 })
 
-gasSensors.events.on('ready', function() {
+gasSensors.events.on('ready', function(sensorData) {
   console.log('gasSensors data is ready');
-  //console.log(JSON.stringify(gasSensors.lastReading()));
+  console.log(JSON.stringify(sensorData));
 });
 gasSensors.setup(gpio,SPI);
 
