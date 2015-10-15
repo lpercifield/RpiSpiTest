@@ -1,5 +1,4 @@
-var EventEmitter = require('events'),
-events = new EventEmitter();
+
 var _gpio;
 var _SPI;
 var spiLocal;
@@ -13,10 +12,10 @@ var burnIn = true;
 var sensorData = {};
 var burnInTime = 14400000;
 
-exports.events = events;
+
 
 exports.setup = function(gpio,spi){
-  events.emit('ready');
+  process.emit('gasready');
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
@@ -42,7 +41,7 @@ function on() {
         sensorData["mq7"] = mq7;
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
-        events.emit('ready');
+        process.emit('gasready');
         _gpio.write(mq7pin, 1, off);
         console.log("ON");
         // if(burnIn){
