@@ -38,8 +38,8 @@ exports.deviceIds = function(callbackMain){
           var imei = stdout.match(imeiRX);
           var iccid = stdout.match(iccidRX);
           var obj = {};
-          obj["imei"] = imei;
-          obj["iccid"] = iccid;
+          obj["imei"] = imei[1];
+          obj["iccid"] = iccid[1];
           callback(null,obj);
           console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
         }
@@ -50,8 +50,8 @@ exports.deviceIds = function(callbackMain){
           var imei = stderr.match(imeiRX);
           var iccid = stderr.match(iccidRX);
           var obj = {};
-          obj["imei"] = imei;
-          obj["iccid"] = iccid;
+          obj["imei"] = imei[1];
+          obj["iccid"] = iccid[1];
           callback(null,obj);
           console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
         }// throw stderr;
