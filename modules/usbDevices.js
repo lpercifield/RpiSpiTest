@@ -32,7 +32,7 @@ exports.deviceIds = function(callbackMain){
       cp.exec(cellcmd,function(error,stdout,stderr){
         if (error) throw error;
         if (stdout){
-          //console.log(stderr);
+          console.log("stdout "+stdout);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
           var iccidRX = /\^ICCID: (\d+)\n/;
           var imei = stdout.match(imeiRX);
@@ -44,7 +44,7 @@ exports.deviceIds = function(callbackMain){
           console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
         }
         if (stderr){
-          //console.log(stderr);
+          console.log("Error "+ stderr);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
           var iccidRX = /\^ICCID: (\d+)\n/;
           var imei = stderr.match(imeiRX);
