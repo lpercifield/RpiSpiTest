@@ -57,10 +57,11 @@ var blinkLed = function(pin,numblinks,speed){
   blink();
 }
 //   var count = 0;
-  function blink(callback) {
+  function blink() {
       if(blinkcount>=blinknumber){
   	     blinkcount=0;
-  	     blinkcallback;
+         blinkcallback();
+  	     return;
       }
       _gpio.write(blinkpin, 1);
       setTimeout(function() {
