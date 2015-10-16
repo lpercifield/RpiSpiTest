@@ -45,7 +45,7 @@ function faultBlink(){
 
 }
 function yellowReady(){
-  console.log("yellow ready");
+  //console.log("yellow ready");
   blinkLed(yellowLed,5,250);
 }
 var blinkLed = function(pin,numblinks,speed){
@@ -55,10 +55,10 @@ var blinkLed = function(pin,numblinks,speed){
   blink();
 }
 //   var count = 0;
-  function blink() {
+  function blink(callback) {
       if(blinkcount>=blinknumber){
   	     blinkcount=0;
-  	     return;
+  	     callback();
       }
       _gpio.write(blinkpin, 1);
       setTimeout(function() {
