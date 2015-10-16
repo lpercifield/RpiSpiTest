@@ -8,7 +8,8 @@ var faultCount = 0;
 var faultTotal = 13;
 var blinklength = 100,
 blinknumber = 1,
-blinkcount = 0;
+blinkcount = 0,
+blinkpin;
 var on = 1;
 var faultStatus = {
   "AM2302":true,
@@ -47,26 +48,31 @@ function yellowReady(){
   console.log("yellow ready");
   blinkLed(yellowLed,5,250);
 }
-function blinkLed(pin,numblinks,speed){
-  var count = 0;
+var blinkLed = function(pin,numblinks,speed){
+  blinkpin = pin;
+  blinknumber = numblinks;
+  blinklength = speed;
+  blink();
+}
+//   var count = 0;
   function blink() {
-      if(count>=numblinks){
-  	     //blinkcount=0;
+      if(blinkcount>=blinknumber){
+  	     blinkcount=0;
   	     return;
       }
-      _gpio.write(pin, 1);
+      _gpio.write(blinkpin, 1);
       setTimeout(function() {
-          _gpio.write(pin, 0, blinkoff);
-          count += 1;
-      }, speed);
+          _gpio.write(blinkpin, 0, blinkoff);
+          blinkcount += 1;
+      }, blinklength);
   }
 
   function blinkoff() {
     setTimeout(function(){
-      _gpio.write(pin, 0,blink);
-    },speed);
+      _gpio.write(blinkpin, 0,blink);
+    },blinklength);
   }
-}
+// }
 
 function heartbeat(){
   //_gpio.write(yellowLed, false);
