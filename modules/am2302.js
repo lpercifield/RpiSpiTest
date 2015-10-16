@@ -11,9 +11,14 @@ var readingTime = 60000;
 exports.setup = function(gpio,callback){
   _gpio = gpio;
   _gpio.setup(AM_RESET_PIN, _gpio.DIR_OUT, function(err){
-    if (err) throw err;
+    if (err){
+      console.error(err);
+      callback(err);
+    } else{
+      amReset(callback);
+    }
     //console.log("Calling amreset");
-    amReset(callback);
+
   });
 }
 //console.log("after gpio setup");
@@ -43,36 +48,40 @@ exports.read = function(){
   try {
     return sensor.read();
   } catch (e) {
-    console.error(e)
+    console.error(e);
+    return e;
     //clearInterval(readingInterval);
-    amReset();
+    //amReset();
   }
 }
 
 
 var amReset = function(callback){
-  console.log("Starting AMRESET")
+  //console.log("Starting AMRESET")
   _gpio.write(AM_RESET_PIN,0,function(err){
-    if (err) throw err;
-    console.log('RESETTING AM2302');
+    if (err) callback(err);
+    //console.error('RESETTING AM2302');
   });
   setTimeout(function(){
     _gpio.write(AM_RESET_PIN,1,function(err){
-      if (err) throw err;
-      console.log('Power On AM2302');
-      setTimeout(callback,1000);
+      if (err){
+        callback(err);
+      } else{
+        //console.log('Power On AM2302');
+        setTimeout(callback,1000);
+      }
     });
   },5000);
 }
 // TODO: Maybe remove this or maybe use a call back on interval if we dont want to us timer in main loop
-// var startReadings = function(){
-//   readingInterval = setInterval(function(){
-//     try {
-//       sensor.read();
-//     } catch (e) {
-//       console.log(e)
-//       clearInterval(readingInterval);
-//       amReset();
-//     }
-//   },5000);
-// }
+var startReadings = function(){
+  readingInterval = setInterval(function(){
+    try {
+      sensor.read();
+    } catch (e) {
+      console.log(e)
+      clearInterval(readingInterval);
+      amReset();
+    }
+  },5000);
+}

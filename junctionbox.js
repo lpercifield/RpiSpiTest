@@ -19,8 +19,14 @@ usbDevices.deviceIds(function(err,results){
 // NOTE: setup LEDS
 leds.setup(gpio);
 // NOTE: setup tempSensor
-tempSensor.setup(gpio,function(){
-  console.log("tempSensor ready");
+
+tempSensor.setup(gpio,function(err){
+  if(err){
+    console.log("AM2302 failed to initialize");
+  }else{
+    leds.setFaultStatus("AM2302",false);
+    console.log("tempSensor ready");
+  }
 });
 // // NOTE: options for setting up pi-timolo
 // var options = {
