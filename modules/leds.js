@@ -9,7 +9,8 @@ var faultTotal = 13;
 var blinklength = 100,
 blinknumber = 1,
 blinkcount = 0,
-blinkpin;
+blinkpin,
+blinkcallback;
 var on = 1;
 var faultStatus = {
   "AM2302":true,
@@ -52,13 +53,14 @@ var blinkLed = function(pin,numblinks,speed){
   blinkpin = pin;
   blinknumber = numblinks;
   blinklength = speed;
-  blink(function(){});
+  blinkcallback = function(){};
+  blink();
 }
 //   var count = 0;
   function blink(callback) {
       if(blinkcount>=blinknumber){
   	     blinkcount=0;
-  	     callback();
+  	     blinkcallback;
       }
       _gpio.write(blinkpin, 1);
       setTimeout(function() {
