@@ -53,16 +53,16 @@ var blinkLed = function(pin,numblinks,speed){
   	     //blinkcount=0;
   	     return;
       }
-      gpio.write(pin, 1);
+      _gpio.write(pin, 1);
       setTimeout(function() {
-          gpio.write(pin, 0, blinkoff);
+          _gpio.write(pin, 0, blinkoff);
           blinkcount += 1;
       }, speed);
   }
 
   function blinkoff() {
     setTimeout(function(){
-      gpio.write(pin, 0,blink);
+      _gpio.write(pin, 0,blink);
     },speed);
   }
 }

@@ -18,8 +18,8 @@ usbDevices.deviceIds(function(err,results){
 
 // NOTE: setup LEDS
 leds.setup(gpio);
-// NOTE: setup tempSensor
 
+// NOTE: setup tempSensor
 tempSensor.setup(gpio,function(err){
   if(err){
     console.log("AM2302 failed to initialize");
