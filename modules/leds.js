@@ -47,7 +47,7 @@ function yellowReady(){
   console.log("yellow ready");
   blinkLed(yellowLed,5,250);
 }
-var blinkLed = function(pin,numblinks,speed){
+function blinkLed(pin,numblinks,speed){
   var count = 0;
   function blink() {
       if(count>=numblinks){
