@@ -10,7 +10,8 @@
     "node-dht-sensor": "~0.0.8",
     "request": "*",
     "python-shell": "*",
-    "ds18x20": "*"
+    "ds18x20": "*",
+    "async": "*"
   },
   "devDependencies": {},
   "repository": {
