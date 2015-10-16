@@ -52,7 +52,7 @@ var blinkLed = function(pin,numblinks,speed){
   blinkpin = pin;
   blinknumber = numblinks;
   blinklength = speed;
-  blink();
+  blink(function(){});
 }
 //   var count = 0;
   function blink(callback) {
