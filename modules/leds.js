@@ -47,13 +47,13 @@ function faultBlink(){
 }
 function yellowReady(){
   //console.log("yellow ready");
-  blinkLed(yellowLed,5,250);
+  blinkLed(yellowLed,5,250,function(){});
 }
-var blinkLed = function(pin,numblinks,speed){
+var blinkLed = function(pin,numblinks,speed,callback){
   blinkpin = pin;
   blinknumber = numblinks;
   blinklength = speed;
-  blinkcallback = function(){};
+  blinkcallback = callback;
   blink();
 }
 //   var count = 0;
