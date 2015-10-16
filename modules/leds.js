@@ -57,7 +57,7 @@ var blinkLed = function(pin,numblinks,speed){
       _gpio.write(pin, 1);
       setTimeout(function() {
           _gpio.write(pin, 0, blinkoff);
-          blinkcount += 1;
+          count += 1;
       }, speed);
   }
 
