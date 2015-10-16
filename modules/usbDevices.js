@@ -37,11 +37,16 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: (\d+)\n/;
           var imei = stdout.match(imeiRX);
           var iccid = stdout.match(iccidRX);
-          var obj = {};
-          obj["imei"] = imei[1];
-          obj["iccid"] = iccid[1];
-          callback(null,obj);
-          console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
+          if(imei == null || iccid == null){
+            callback("no modem");
+          }else{
+            var obj = {};
+            obj["imei"] = imei[1];
+            obj["iccid"] = iccid[1];
+            callback(null,obj);
+            console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
+          }
+
         }
         if (stderr){
           console.log("Error "+ stderr);
@@ -49,11 +54,15 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: (\d+)\n/;
           var imei = stderr.match(imeiRX);
           var iccid = stderr.match(iccidRX);
-          var obj = {};
-          obj["imei"] = imei[1];
-          obj["iccid"] = iccid[1];
-          callback(null,obj);
-          console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
+          if(imei == null || iccid == null){
+            callback("no modem");
+          }else{
+            var obj = {};
+            obj["imei"] = imei[1];
+            obj["iccid"] = iccid[1];
+            callback(null,obj);
+            console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
+          }
         }// throw stderr;
       });
     }

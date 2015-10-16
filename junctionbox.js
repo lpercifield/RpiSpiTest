@@ -9,7 +9,11 @@ var mainInterval;
 var mainLoopTime = 60000;
 
 usbDevices.deviceIds(function(err,results){
-  console.log(JSON.stringify(results));
+  if(err){
+    console.error(err);
+  }else{
+    console.log(JSON.stringify(results));
+  }
 });
 
 // NOTE: setup LEDS
