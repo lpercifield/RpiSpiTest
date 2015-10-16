@@ -48,6 +48,7 @@ function faultBlink(){
 function yellowReady(){
   //console.log("yellow ready");
   blinkLed(yellowLed,5,250,function(){});
+  faultCode();
 }
 var blinkLed = function(pin,numblinks,speed,callback){
   blinkpin = pin;
