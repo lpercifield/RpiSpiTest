@@ -36,9 +36,9 @@ exports.setFaultStatus = function(object,status){
   faultStatus[object] = status;
 }
 function faultCode(){
-  for (var status in errorStatus) {
-   if (errorStatus.hasOwnProperty(status)) {
-     console.log(status + "="+errorStatus[status]);
+  for (var status in faultStatus) {
+   if (faultStatus.hasOwnProperty(status)) {
+     console.log(status + "="+faultStatus[status]);
     }
   }
 }
