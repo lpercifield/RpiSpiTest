@@ -24,13 +24,12 @@ exports.setup = function(gpio,spi,callback){
       'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(1000000);
-      if(s.open() != null){
-        setTimeout(function(){burnIn = false},burnInTime);
-        checkValues(callback);
-      }
+      s.open();
       //if(s.open())
       //console.log("GAS SPI: " + typeof spi_return);
     });
+    setTimeout(function(){burnIn = false},burnInTime);
+    checkValues(callback);
 
 }
 exports.lastReading = function(){
