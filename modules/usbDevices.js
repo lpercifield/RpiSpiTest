@@ -8,32 +8,32 @@ exports.deviceIds = function(callbackMain){
   async.parallel({
     ralink: function(callback){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
-        if (error) callback(null,null);
+        if (error) callback(null,false);
         if (stdout){
           var str = stdout.toString().trim();
           //console.log(str);
           callback(null,str);
         }
-        if (stderr) callback(null,null);
+        if (stderr) callback(null,false);
       });
     },
     huawei: function(callback){
       cp.exec(huaweicmd,function(error,stdout,stderr){
-        if (error) callback(null,null);
+        if (error) callback(null,false);
         if (stdout){
           var str = stdout.toString().trim();
           //console.log(str);
           callback(null,str);
         }
-        if (stderr) callback(null,null);
+        if (stderr) callback(null,false);
       });
     },
     cell: function(callback){
       cp.exec(cellcmd,function(error,stdout,stderr){
         if (error) {
           var obj = {};
-          obj["imei"] = null;
-          obj["iccid"] = null;
+          obj["imei"] = false;
+          obj["iccid"] = false;
           callback(null,obj);
         }
         if (stdout){
@@ -44,8 +44,8 @@ exports.deviceIds = function(callbackMain){
           var iccid = stdout.match(iccidRX);
           if(imei == null || iccid == null){
             var obj = {};
-            obj["imei"] = null;
-            obj["iccid"] = null;
+            obj["imei"] = false;
+            obj["iccid"] = false;
             callback(null,obj);
           }else{
             var obj = {};
@@ -64,8 +64,8 @@ exports.deviceIds = function(callbackMain){
           var iccid = stderr.match(iccidRX);
           if(imei == null || iccid == null){
             var obj = {};
-            obj["imei"] = null;
-            obj["iccid"] = null;
+            obj["imei"] = false;
+            obj["iccid"] = false;
             callback(null,obj);
           }else{
             var obj = {};

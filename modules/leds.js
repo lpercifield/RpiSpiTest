@@ -12,20 +12,20 @@ blinkcount = 0,
 blinkpin,
 blinkcallback;
 var on = 1;
-var faultStatus = {
-  "AM2302":true,
-"ext1":true,
-"ext2":true,
-"ext3":true,
-"wlan0":true,
-"wlan1":true,
-"imei":true,
-"iccid":true,
-"mic":true,
-"MQ7":true,
-"MQ135":true,
-"Camera":true,
-"Ethernet":true
+var deviceStatus = {
+  "AM2302":false,
+"ext1":false,
+"ext2":false,
+"ext3":false,
+"wlan0":false,
+"wlan1":false,
+"imei":false,
+"iccid":false,
+"mic":false,
+"MQ7":false,
+"MQ135":false,
+"Camera":false,
+"Ethernet":false
 }
 exports.setup = function(gpio){
   _gpio = gpio;

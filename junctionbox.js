@@ -32,7 +32,7 @@ leds.setup(gpio);
 ///////////////////// EVENTS /////////////////////////
 // NOTE: register events from gas sensors
 gasSensors.events.on('data', function(sensorData) {
-  console.log('gasSensors have data');
+  //console.log('gasSensors have data');
   console.log(JSON.stringify(sensorData));
 })
 //////////////////////////////////////////////////////
@@ -44,20 +44,20 @@ async.series({
         if(err){
           console.log("AM2302 failed to initialize");
         }else{
-          leds.setFaultStatus("AM2302",false);
+          leds.setFaultStatus("AM2302",true);
           //console.log("tempSensor ready");
-          callback(null, false);
+          callback(null, true);
         }
       });
     },
     ext: function(callback){
-        callback(null, true);
+        callback(null, false);
     },
     usb: function(callback){
       usbDevices.deviceIds(function(err,results){
         if(err){
           console.error(err);
-          callback(null,true);
+          callback(null,false);
         }else{
           //console.log(JSON.stringify(results));
           callback(null, results);
@@ -65,7 +65,7 @@ async.series({
       });
     },
     mic: function(callback){
-        callback(null, true);
+        callback(null, false);
     },
     gas: function(callback){
         // NOTE: setup gas sensor
@@ -75,10 +75,10 @@ async.series({
         });
     },
     camera: function(callback){
-        callback(null, true);
+        callback(null, false);
     },
     ethernet: function(callback){
-        callback(null, true);
+        callback(null, false);
     }
 },
 function(err, results) {
