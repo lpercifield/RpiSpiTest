@@ -18,10 +18,10 @@ timolo.on('message', function (message) {
 });
 timolo.on('error', function (message) {
   console.log(message);
-}
+});
 timolo.on('close', function (message) {
   console.log(message);
-}
+});
 setTimeout(function(){
   // end the input stream and allow the process to exit
   timolo.end(function (err) {
