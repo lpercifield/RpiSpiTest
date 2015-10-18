@@ -58,7 +58,7 @@ function on() {
         sensorData["mq7"] = mq7;
         sensorData["mq135"] = mq135;
         sensorData["burnIn"] = burnIn;
-        events.emit('ready',sensorData);
+        events.emit('data',sensorData);
         _gpio.write(mq7pin, 1, off);
         //console.log("ON");
         // if(burnIn){

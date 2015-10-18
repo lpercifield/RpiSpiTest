@@ -31,8 +31,8 @@ leds.setup(gpio);
 
 ///////////////////// EVENTS /////////////////////////
 // NOTE: register events from gas sensors
-gasSensors.events.on('ready', function(sensorData) {
-  console.log('gasSensors are ready');
+gasSensors.events.on('data', function(sensorData) {
+  console.log('gasSensors have data');
   console.log(JSON.stringify(sensorData));
 })
 //////////////////////////////////////////////////////
