@@ -69,8 +69,9 @@ async.series({
     },
     gas: function(callback){
         // NOTE: setup gas sensor
-        gasSensors.setup(gpio,SPI);
-        callback(null, false);
+        gasSensors.setup(gpio,SPI,function(result){
+          callback(null, result);
+        });
     },
     camera: function(callback){
         callback(null, true);

@@ -15,7 +15,7 @@ var burnInTime = 14400000;
 
 exports.events = events;
 
-exports.setup = function(gpio,spi){
+exports.setup = function(gpio,spi,callback){
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
@@ -24,16 +24,31 @@ exports.setup = function(gpio,spi){
       'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(1000000);
-      var spi_return = s.open();
+      if(s.open() != null){
+        setTimeout(function(){burnIn = false},burnInTime);
+        checkValues(callback);
+      }
       //if(s.open())
-      console.log("GAS SPI: " + typeof spi_return);
+      //console.log("GAS SPI: " + typeof spi_return);
     });
-    setTimeout(function(){burnIn = false},burnInTime);
+
 }
 exports.lastReading = function(){
   return sensorData;
 }
 
+function checkValues(callback){
+  var sensorStatus = {"mq7":true,"mq135":true};
+  var mq7 = getADC(0);
+  var mq135 = getADC(1);
+  if(parseInt(mq7)> 0 || parseInt(mq7) < 1023){
+    sensorStatus.mq7 = false;
+  }
+  if(parseInt(mq135)> 0 || parseInt(mq135) < 1023){
+    sensorStatus.mq135 = false;
+  }
+  callback(sensorStatus);
+}
 
 function on() {
     setTimeout(function() {
