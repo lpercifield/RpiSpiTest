@@ -1,4 +1,5 @@
-var EventEmitter = require('events');
+var EventEmitter = require('events'),
+events = new EventEmitter();
 var average = [];
 var lastAverage;
 var averageNumber = 1200;
