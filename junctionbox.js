@@ -56,7 +56,7 @@ async.series({
     usb: function(callback){
       usbDevices.deviceIds(function(err,results){
         if(err){
-          console.error(err);
+          console.error(null,true);
           callback(err);
         }else{
           console.log(JSON.stringify(results));
@@ -81,7 +81,7 @@ async.series({
 },
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
-    if(err) throw err;
+    if(err) console.error(err);
     console.log(results.toString());
 });
 
