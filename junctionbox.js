@@ -81,6 +81,7 @@ async.series({
 },
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
+    if(err) throw err;
     console.log(results.toString());
 });
 
