@@ -35,7 +35,7 @@ exports.setup = function(gpio){
 exports.setFaultStatus = function(object,status){
   faultStatus[object] = status;
 }
-function faultCode(){
+exports.faultCode = function(){
   for (var status in faultStatus) {
    if (faultStatus.hasOwnProperty(status)) {
      console.log(status + "="+faultStatus[status]);
@@ -48,7 +48,7 @@ function faultBlink(){
 function yellowReady(){
   //console.log("yellow ready");
   blinkLed(yellowLed,5,250,function(){});
-  faultCode();
+  //faultCode();
 }
 var blinkLed = function(pin,numblinks,speed,callback){
   blinkpin = pin;

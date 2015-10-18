@@ -1,5 +1,7 @@
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
+var config = require('nconf');
+var async = require("async");
 var leds = require("./modules/leds.js");
 var PythonShell = require('python-shell');
 var tempSensor = require("./modules/am2302.js");
@@ -7,27 +9,91 @@ var gasSensors = require("./modules/gasSensors.js");
 var usbDevices = require("./modules/usbDevices.js");
 var mainInterval;
 var mainLoopTime = 60000;
+config.use('file', { file: './config/default.json' });
 
-usbDevices.deviceIds(function(err,results){
-  if(err){
-    console.error(err);
-  }else{
-    console.log(JSON.stringify(results));
-  }
-});
-
+// var faultStatus = {
+//   "AM2302":true,
+// "ext1":true,
+// "ext2":true,
+// "ext3":true,
+// "wlan0":true,
+// "wlan1":true,
+// "imei":true,
+// "iccid":true,
+// "mic":true,
+// "MQ7":true,
+// "MQ135":true,
+// "Camera":true,
+// "Ethernet":true
+// }
 // NOTE: setup LEDS
 leds.setup(gpio);
 
-// NOTE: setup tempSensor
-tempSensor.setup(gpio,function(err){
-  if(err){
-    console.log("AM2302 failed to initialize");
-  }else{
-    leds.setFaultStatus("AM2302",false);
-    console.log("tempSensor ready");
-  }
+///////////////////// EVENTS /////////////////////////
+// NOTE: register events from gas sensors
+gasSensors.events.on('ready', function(sensorData) {
+  console.log('gasSensors are ready');
+  console.log(JSON.stringify(sensorData));
+})
+//////////////////////////////////////////////////////
+
+async.series({
+    am2302: function(callback){
+      // NOTE: setup tempSensor
+      tempSensor.setup(gpio,function(err){
+        if(err){
+          console.log("AM2302 failed to initialize");
+        }else{
+          leds.setFaultStatus("AM2302",false);
+          console.log("tempSensor ready");
+          callback(null, false);
+        }
+      });
+    },
+    ext: function(callback){
+        callback(null, true);
+    },
+    usb: function(callback){
+      usbDevices.deviceIds(function(err,results){
+        if(err){
+          console.error(err);
+        }else{
+          console.log(JSON.stringify(results));
+          callback(null, results);
+        }
+      });
+    },
+    mic: function(callback){
+        callback(null, true);
+    },
+    gas: function(callback){
+        // NOTE: setup gas sensor
+        gasSensors.setup(gpio,SPI);
+        callback(null, false);
+    },
+    camera: function(callback){
+        callback(null, true);
+    },
+    ethernet: function(callback){
+        callback(null, true);
+    }
+},
+function(err, results) {
+    // results is now equal to: {am2302: 1, ext: 2...}
+    console.log(results.toString());
 });
+
+// usbDevices.deviceIds(function(err,results){
+//   if(err){
+//     console.error(err);
+//   }else{
+//     console.log(JSON.stringify(results));
+//   }
+// });
+
+
+
+
 // // NOTE: options for setting up pi-timolo
 // var options = {
 //   mode: 'json',
@@ -45,14 +111,9 @@ tempSensor.setup(gpio,function(err){
 //   console.log(message);
 // });
 
-// NOTE: register events from gas sensors
-gasSensors.events.on('ready', function(sensorData) {
-  console.log('gasSensors data is ready');
-  console.log(JSON.stringify(sensorData));
-});
 
-// NOTE: setup gas sensor
-gasSensors.setup(gpio,SPI);
+
+
 
 // NOTE: setup main loop interval
 mainInterval = setInterval(mainLoop,mainLoopTime);

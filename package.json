@@ -11,7 +11,8 @@
     "request": "*",
     "python-shell": "*",
     "ds18x20": "*",
-    "async": "*"
+    "async": "*",
+    "nconf": "^0.8.2"
   },
   "devDependencies": {},
   "repository": {
