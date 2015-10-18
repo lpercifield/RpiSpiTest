@@ -17,7 +17,7 @@ timolo.on('message', function (message) {
   console.log(message);
 });
 timolo.on('error', function (message) {
-  console.log(message);
+  console.error(message);
 });
 timolo.on('close', function (message) {
   console.log(message);
@@ -25,7 +25,7 @@ timolo.on('close', function (message) {
 setTimeout(function(){
   // end the input stream and allow the process to exit
   timolo.end(function (err) {
-    if (err) throw err;
+    if (err) console.error(err);
     console.log('finished');
   });
 },60000);
