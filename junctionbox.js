@@ -70,6 +70,7 @@ async.series({
     gas: function(callback){
         // NOTE: setup gas sensor
         gasSensors.setup(gpio,SPI,function(result){
+          //console.log("waiting for gas sensors");
           callback(null, result);
         });
     },
@@ -83,7 +84,7 @@ async.series({
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
     if(err) console.error(err);
-    console.log(results.toString());
+    console.log(JSON.stringify(results));
 });
 
 // usbDevices.deviceIds(function(err,results){
