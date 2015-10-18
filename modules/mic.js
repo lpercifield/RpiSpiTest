@@ -29,7 +29,7 @@ exports.setup = function(SPI,callback){
   //startReadings();
 }
 function checkValues(callback){
-  spi.read(rxbuf, function(device, buf) {
+  localSpi.read(rxbuf, function(device, buf) {
     var sample = buf.readUInt16BE(0);
     if(sample >0 || sample < 4096){
       startReadings();
@@ -42,7 +42,7 @@ function checkValues(callback){
 
 function startReadings(){
   sampleinterval = setInterval(function(){
-    spi.read(rxbuf, function(device, buf) {
+    localSpi.read(rxbuf, function(device, buf) {
       //console.log(buf.readUInt16BE(0));
       var sample = buf.readUInt16BE(0);
       if (sample > signalMax)
