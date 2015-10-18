@@ -45,7 +45,7 @@ async.series({
           console.log("AM2302 failed to initialize");
         }else{
           leds.setFaultStatus("AM2302",false);
-          console.log("tempSensor ready");
+          //console.log("tempSensor ready");
           callback(null, false);
         }
       });
@@ -59,7 +59,7 @@ async.series({
           console.error(err);
           callback(null,true);
         }else{
-          console.log(JSON.stringify(results));
+          //console.log(JSON.stringify(results));
           callback(null, results);
         }
       });
