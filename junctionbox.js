@@ -57,6 +57,7 @@ async.series({
       usbDevices.deviceIds(function(err,results){
         if(err){
           console.error(err);
+          callback(err);
         }else{
           console.log(JSON.stringify(results));
           callback(null, results);
