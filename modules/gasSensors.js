@@ -24,8 +24,9 @@ exports.setup = function(gpio,spi){
       'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(1000000);
+      var spi_return = s.open();
       //if(s.open())
-      console.log("GAS SPI: " + typeof s.open());
+      console.log("GAS SPI: " + typeof spi_return);
     });
     setTimeout(function(){burnIn = false},burnInTime);
 }
