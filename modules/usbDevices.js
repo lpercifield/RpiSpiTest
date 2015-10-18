@@ -8,29 +8,34 @@ exports.deviceIds = function(callbackMain){
   async.parallel({
     ralink: function(callback){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
-        if (error) throw error;
+        if (error) callback(null,null);
         if (stdout){
           var str = stdout.toString().trim();
           //console.log(str);
           callback(null,str);
         }
-        if (stderr) throw stderr;
+        if (stderr) callback(null,null);
       });
     },
     huawei: function(callback){
       cp.exec(huaweicmd,function(error,stdout,stderr){
-        if (error) throw error;
+        if (error) callback(null,null);
         if (stdout){
           var str = stdout.toString().trim();
           //console.log(str);
           callback(null,str);
         }
-        if (stderr) throw stderr;
+        if (stderr) callback(null,null);
       });
     },
     cell: function(callback){
       cp.exec(cellcmd,function(error,stdout,stderr){
-        if (error) throw error;
+        if (error) {
+          var obj = {};
+          obj["imei"] = null;
+          obj["iccid"] = null;
+          callback(null,obj);
+        }
         if (stdout){
           //console.log("stdout "+stdout);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
@@ -38,7 +43,10 @@ exports.deviceIds = function(callbackMain){
           var imei = stdout.match(imeiRX);
           var iccid = stdout.match(iccidRX);
           if(imei == null || iccid == null){
-            callback("no modem");
+            var obj = {};
+            obj["imei"] = null;
+            obj["iccid"] = null;
+            callback(null,obj);
           }else{
             var obj = {};
             obj["imei"] = imei[1];
