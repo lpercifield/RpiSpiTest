@@ -55,7 +55,10 @@ exports.deviceIds = function(callbackMain){
           var imei = stderr.match(imeiRX);
           var iccid = stderr.match(iccidRX);
           if(imei == null || iccid == null){
-            callback("no modem");
+            var obj = {};
+            obj["imei"] = null;
+            obj["iccid"] = null;
+            callback(null,obj);
           }else{
             var obj = {};
             obj["imei"] = imei[1];
