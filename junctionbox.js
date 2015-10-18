@@ -3,6 +3,7 @@ var SPI = require('spi');
 var config = require('nconf');
 var async = require("async");
 var leds = require("./modules/leds.js");
+var audio = require("./modules/mic.js");
 var PythonShell = require('python-shell');
 var tempSensor = require("./modules/am2302.js");
 var gasSensors = require("./modules/gasSensors.js");
@@ -35,6 +36,9 @@ gasSensors.events.on('data', function(sensorData) {
   //console.log('gasSensors have data');
   console.log(JSON.stringify(sensorData));
 })
+audio.events.on('data',function(audioData){
+  console.log(JSON.stringify(audioData));
+})
 //////////////////////////////////////////////////////
 
 async.series({
@@ -65,7 +69,9 @@ async.series({
       });
     },
     mic: function(callback){
-        callback(null, false);
+      audio.setup(SPI,function(status){
+        callback(null, status);
+      })
     },
     gas: function(callback){
         // NOTE: setup gas sensor
