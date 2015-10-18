@@ -33,12 +33,12 @@ exports.setup = function(gpio){
   _gpio.setup(redLed, _gpio.DIR_OUT);
 }
 exports.setFaultStatus = function(object,status){
-  faultStatus[object] = status;
+  deviceStatus[object] = status;
 }
 exports.faultCode = function(){
   for (var status in faultStatus) {
-   if (faultStatus.hasOwnProperty(status)) {
-     console.log(status + "="+faultStatus[status]);
+   if (deviceStatus.hasOwnProperty(status)) {
+     console.log(status + "="+deviceStatus[status]);
     }
   }
 }
