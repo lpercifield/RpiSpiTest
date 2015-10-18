@@ -37,14 +37,14 @@ exports.lastReading = function(){
 }
 
 function checkValues(callback){
-  var sensorStatus = {"mq7":true,"mq135":true};
+  var sensorStatus = {"mq7":false,"mq135":false};
   var mq7 = getADC(0);
   var mq135 = getADC(1);
   if(parseInt(mq7)> 0 || parseInt(mq7) < 1023){
-    sensorStatus.mq7 = false;
+    sensorStatus.mq7 = true;
   }
   if(parseInt(mq135)> 0 || parseInt(mq135) < 1023){
-    sensorStatus.mq135 = false;
+    sensorStatus.mq135 = true;
   }
   callback(sensorStatus);
 }
