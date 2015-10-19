@@ -85,7 +85,7 @@ function startReadings(){
     maxPeak = 0;
     average = [];
     console.log(outString);
-    var micData = {"average":vale,"max":maxPeak};
+    var micData = {"average":value,"max":maxPeak};
     audioArray.push(micData);
   })
 }
