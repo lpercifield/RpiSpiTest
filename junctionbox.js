@@ -121,13 +121,13 @@ async.series({
       });
     },
     mic: function(callback){
-      audio.setup(SPI,function(status){
+      audio.setup(SPI,config.get("microphone_spi_bus"),function(status){
         callback(null, status);
       })
     },
     gas: function(callback){
         // NOTE: setup gas sensor
-        gasSensors.setup(gpio,SPI,function(result){
+        gasSensors.setup(gpio,SPI,config.get("gas_spi_bus"),function(result){
           //console.log("waiting for gas sensors");
           callback(null, result);
         });

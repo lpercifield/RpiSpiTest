@@ -2,8 +2,8 @@ var EventEmitter = require('events'),
 events = new EventEmitter();
 var _gpio;
 var sensorLib = require('node-dht-sensor');
-var AM_PIN = 17;
-var AM_RESET_PIN = 15;
+var AM_PIN;
+var AM_RESET_PIN;
 var readingnumber = 0;
 var readingInterval;
 var readingTime = 10000;
