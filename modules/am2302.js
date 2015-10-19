@@ -92,17 +92,17 @@ exports.read = function(){
 
 
 var amReset = function(callback){
-  //console.log("Starting AMRESET")
+   console.log("Starting AMRESET")
   _gpio.write(AM_RESET_PIN,0,function(err){
     if (err) callback(err);
-    //console.error('RESETTING AM2302');
+    console.error('RESETTING AM2302');
   });
   setTimeout(function(){
     _gpio.write(AM_RESET_PIN,1,function(err){
       if (err){
         callback(err);
       } else{
-        //console.log('Power On AM2302');
+        console.log('Power On AM2302');
         resetCount ++;
         setTimeout(function(){
           callback();
@@ -110,7 +110,7 @@ var amReset = function(callback){
         //TODO check sensor values before calling back
       }
     });
-  },1000);
+  },5000);
 }
 // TODO: Maybe remove this or maybe use a call back on interval if we dont want to us timer in main loop
 var startReadings = function(){
