@@ -159,7 +159,7 @@ function(err, results) {
 
 function on_exit(){
      console.log('Process Exit');
-     SPI.close();
+     //SPI.close();
      gpio.destroy();
      timolo.end(function (err) {
        if (err) throw err;

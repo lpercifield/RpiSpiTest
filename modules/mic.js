@@ -150,3 +150,9 @@ function medianFun(values) {
     else
         return (values[half-1] + values[half]) / 2.0;
 }
+function on_exit(){
+  console.log("closing mic spi");
+  localSpi.close();
+}
+
+ process.on('SIGINT',on_exit);
