@@ -12,7 +12,8 @@
     "python-shell": "*",
     "ds18x20": "*",
     "async": "*",
-    "nconf": "^0.8.2"
+    "nconf": "^0.8.2",
+    "fs-extra":"~0.24.0"
   },
   "devDependencies": {},
   "repository": {

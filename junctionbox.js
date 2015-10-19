@@ -55,6 +55,12 @@ timolo.on('message', function (message) {
   console.log("Timelapse " + message.hasOwnProperty('timelapse'));
   console.log(message);
 });
+timolo.on('error', function (message) {
+  console.error(message);
+});
+timolo.on('close', function (message) {
+  console.log(message);
+});
 //////////////////////////////////////////////////////
 
 //NOTE: Empty timolo directories
@@ -108,10 +114,15 @@ async.series({
     camera: function(callback){
       // NOTE: create timolo instance
         timolo = new PythonShell('pi-timolo.py',options);
-        // PythonShell.run('script.py', function (err, results) {
-        //   // script finished
-        // });
-        callback(null, false);
+        timolo.on('message', function (message) {
+          if(message.hasOwnProperty('timolo')){
+            callback(null, true);
+          }
+        }
+        timolo.on('error', function (message) {
+          //console.error(message);
+          callback(null, false);
+        });
     },
     ethernet: function(callback){
         callback(null, false);
