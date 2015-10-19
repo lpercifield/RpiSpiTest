@@ -12,7 +12,7 @@ exports.deviceIds = function(callbackMain){
         if (stdout){
           //var str = stdout.toString().trim();
           var ralinkObj = {};
-          var str = data.toString(), lines = str.split(/(\r?\n)/g);
+          var str = stdout.toString(), lines = str.split(/(\r?\n)/g);
             for (var i=0; i<lines.length; i++) {
               // Process the line, noting it might be incomplete.
               ralinkObj.wlan0 = lines[0];
