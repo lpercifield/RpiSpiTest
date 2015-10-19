@@ -27,7 +27,13 @@ exports.setup = function(SPI,spi_bus,callback){
       'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(6000000);
-      s.open();
+      try{
+        s.open();
+      }catch(e){
+        console.error("MIC SPI error")
+        callback(false)
+      }
+
     });
   checkValues(callback);
   //startReadings();
