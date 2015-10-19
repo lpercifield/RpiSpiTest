@@ -1,3 +1,5 @@
+var EventEmitter = require('events'),
+events = new EventEmitter();
 var _gpio;
 var sensorLib = require('node-dht-sensor');
 var AM_PIN = 17;
@@ -5,6 +7,8 @@ var AM_RESET_PIN = 15;
 var readingnumber = 0;
 var readingInterval;
 var readingTime = 60000;
+
+exports.events = events;
 
 //console.log("before gpio setup");
 //gpio.setup(AM_PIN, gpio.DIR_OUT);
@@ -77,11 +81,14 @@ var amReset = function(callback){
 var startReadings = function(){
   readingInterval = setInterval(function(){
     try {
-      sensor.read();
+      var reading = sensor.read();
+      var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
+      events.emit('data',obj);
     } catch (e) {
       console.log(e)
+      events.emit('error',e);
       clearInterval(readingInterval);
       amReset();
     }
-  },5000);
+  },60000);
 }

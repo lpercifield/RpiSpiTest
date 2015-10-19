@@ -11,6 +11,7 @@ exports.deviceIds = function(callbackMain){
         if (error) callback(null,false);
         if (stdout){
           var str = stdout.toString().trim();
+          //TODO: check for second device
           //console.log(str);
           callback(null,str);
         }

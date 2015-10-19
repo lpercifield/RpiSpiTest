@@ -18,7 +18,7 @@ var deviceStatus = {
   "ext":false,
   "usb":{
     "cell":{"imei":false,"iccid":false},
-    "ralink":false,
+    "ralink":false, // TODO: add second ralink device
     "huawei":false
   },
   "mic":false,
@@ -41,6 +41,8 @@ exports.initFaultStatus = function(status){
        _.each(val, function(v) {
             console.log(v)
        })
+    }else{
+      console.log(_.values);
     }
 })
 }

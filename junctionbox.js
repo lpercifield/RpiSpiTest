@@ -3,16 +3,21 @@ var gpio = require('rpi-gpio');
 var SPI = require('spi');
 var config = require('nconf');
 var async = require("async");
+var PythonShell = require('python-shell');
+
 var leds = require("./modules/leds.js");
 var audio = require("./modules/mic.js");
-var PythonShell = require('python-shell');
 var tempSensor = require("./modules/am2302.js");
 var gasSensors = require("./modules/gasSensors.js");
 var usbDevices = require("./modules/usbDevices.js");
+var dataObject = {};
 var mainInterval;
 var mainLoopTime = 60000;
 var timolo;
-// NOTE: options for setting up pi-timolo
+/**
+ * [timoloOptions description]
+ * @type {Object}
+ */
 var timoloOptions = {
   mode: 'json',
   scriptPath: '/home/pi/pi-timolo'
@@ -39,13 +44,26 @@ config.use('file', { file: './config/default.json' });
 leds.setup(gpio);
 
 ///////////////////// EVENTS /////////////////////////
-// NOTE: register events from gas sensors
+//register events from gas sensors
+/**
+ * [on description]
+ * @param  {[type]} 'data'              [description]
+ * @param  {[type]} function(sensorData [description]
+ * @return {[type]}                     [description]
+ */
 gasSensors.events.on('data', function(sensorData) {
   //console.log('gasSensors have data');
   console.log(JSON.stringify(sensorData));
+  dataObject.gas = sensorData;
 })
-audio.events.on('data',function(audioData){
-  console.log(JSON.stringify(audioData));
+
+tempSensor.events.on('data',function(sensorData){
+  console.log(JSON.stringify(sensorData));
+  dataObject.am2302 = sensorData;
+});
+audio.events.on('data',function(audioArray){
+  console.log(audioArray.toString());
+  //console.log(JSON.stringify(audioData));
 })
 function registerTimoloEvents(){
   // NOTE: register timolo message event
@@ -65,7 +83,7 @@ function registerTimoloEvents(){
 }
 //////////////////////////////////////////////////////
 
-//NOTE: Empty timolo directories
+//Empty timolo directories
 fs.emptyDir('/home/pi/pi-timolo/motion', function (err) {
   if (!err) console.log('success!')
 })
@@ -80,6 +98,7 @@ async.series({
       tempSensor.setup(gpio,function(err){
         if(err){
           console.log("AM2302 failed to initialize");
+          callback(null, false);
         }else{
           //leds.setFaultStatus("AM2302",true);
           //console.log("tempSensor ready");
