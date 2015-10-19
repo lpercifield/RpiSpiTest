@@ -39,7 +39,13 @@ exports.initFaultStatus = function(status){
   _.each(deviceStatus, function(val) {
     if (_.isObject(val)) {
        _.each(val, function(v) {
-            console.log(v)
+         if (_.isObject(v)) {
+           _.each(val, function(v1) {
+             console.log(v1)
+           }
+         }else{
+           console.log(v)
+         }
        })
     }else{
       console.log(val);
