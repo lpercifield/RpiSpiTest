@@ -7,6 +7,8 @@ var AM_RESET_PIN;
 var readingnumber = 0;
 var readingInterval;
 var readingTime = 10000;
+var resetCount = 0;
+var maxResets = 2;
 
 exports.events = events;
 
@@ -19,9 +21,9 @@ exports.setup = function(gpio,dataPin,resetPin,callback){
   _gpio.setup(AM_RESET_PIN, _gpio.DIR_OUT, function(err){
     if (err){
       console.error(err);
-      callback(err);
+      callback(false);
     } else{
-      amReset(callback);
+      checkValues(callback);
     }
     //console.log("Calling amreset");
 
@@ -47,6 +49,28 @@ var sensor = {
     }
 };
 
+function checkValues(callback){
+  try {
+    var reading = sensor.read();
+    if(reading.temperature.toFixed(1)<=0 || reading.humidity.toFixed(1) <=0){
+      amReset(function(){
+        var reading = sensor.read();
+        if(reading.temperature.toFixed(1)<=0 || reading.humidity.toFixed(1) <=0){
+          callback(false);
+        }
+      });
+    }else{
+      //var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
+      callback(true);
+      //events.emit('data',obj);
+    }
+  } catch (e) {
+    console.log(e)
+    events.emit('error',e);
+    //clearInterval(readingInterval);
+    amReset(callback);
+  }
+}
 exports.reset = function(callback){
   amReset(callback);
 }
@@ -74,11 +98,14 @@ var amReset = function(callback){
         callback(err);
       } else{
         //console.log('Power On AM2302');
-        setTimeout(callback,1000);
+        resetCount ++;
+        setTimeout(function(){
+          callback();
+        },1000);
         //TODO check sensor values before calling back
       }
     });
-  },5000);
+  },1000);
 }
 // TODO: Maybe remove this or maybe use a call back on interval if we dont want to us timer in main loop
 var startReadings = function(){
@@ -91,7 +118,7 @@ var startReadings = function(){
       console.log(e)
       events.emit('error',e);
       clearInterval(readingInterval);
-      amReset();
+      //amReset();
     }
   },readingTime);
 }

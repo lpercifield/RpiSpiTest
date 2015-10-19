@@ -33,7 +33,6 @@ exports.setup = function(SPI,spi_bus,callback){
         console.error("MIC SPI error")
         callback(false)
       }
-
     });
   checkValues(callback);
   //startReadings();

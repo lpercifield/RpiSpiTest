@@ -24,7 +24,12 @@ exports.setup = function(gpio,spi,spi_bus,callback){
       'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
       s.maxSpeed(1000000);
-      s.open();
+      try{
+        s.open();
+      }catch(e){
+        console.error("GAS SPI error")
+        callback(false)
+      }
       //if(s.open())
       //console.log("GAS SPI: " + typeof spi_return);
     });
