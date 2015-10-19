@@ -175,6 +175,6 @@ mainInterval = setInterval(mainLoop,mainLoopTime);
 
 // NOTE: function that runs when the main interval expires
 function mainLoop(){
-  var tempReading = tempSensor.read();
-  console.log("Temp: "+tempReading.temperature.toFixed(1) + " Humidity: "+tempReading.humidity.toFixed(1));
+  //var tempReading = tempSensor.read();
+  //console.log("Temp: "+tempReading.temperature.toFixed(1) + " Humidity: "+tempReading.humidity.toFixed(1));
 }
