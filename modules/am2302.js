@@ -6,7 +6,7 @@ var AM_PIN = 17;
 var AM_RESET_PIN = 15;
 var readingnumber = 0;
 var readingInterval;
-var readingTime = 10000;
+var readingTime = 60000;
 var resetCount = 0;
 var maxResets = 2;
 
@@ -57,9 +57,9 @@ function checkValues(callback){
     console.log("HERE: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
     if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
       amReset(function(){
-        var reading = sensor.read();
-        console.log("after reset: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
-        if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
+        var reading2 = sensor.read();
+        console.log("after reset: temp: "+reading2.temperature.toFixed(1)+ " humidity: "+reading2.humidity.toFixed(1));
+        if(reading2.temperature.toFixed(1)==0.0 || reading2.humidity.toFixed(1) ==0.0){
           callback(false);
         }else{
           console.log("calling back from am2302");
