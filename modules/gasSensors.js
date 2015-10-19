@@ -93,7 +93,7 @@ var getADC = function(channel){
 }
 function on_exit(){
   console.log("closing gas spi");
-  localSpi.close();
+  spiLocal.close();
 }
 
  process.on('SIGINT',on_exit);
