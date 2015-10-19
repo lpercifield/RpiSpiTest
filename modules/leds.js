@@ -1,3 +1,4 @@
+var _ = require('underscore-node');
 var _gpio,
   yellowLed = 40,
   redLed = 38,
@@ -13,20 +14,17 @@ blinkpin,
 blinkcallback;
 var on = 1;
 var deviceStatus = {
-  "AM2302":false,
-"ext1":false,
-"ext2":false,
-"ext3":false,
-"wlan0":false,
-"wlan1":false,
-"imei":false,
-"iccid":false,
-"mic":false,
-"MQ7":false,
-"MQ135":false,
-"Camera":false,
-"Ethernet":false
-}
+  "am2302":false,
+  "ext":false,
+  "usb":{
+    "cell":{"imei":false,"iccid":false},
+    "ralink":false,
+    "huawei":false
+  },
+  "mic":false,
+  "gas":{"mq7":false,"mq135":false},
+  "camera":false,
+  "ethernet":false}
 exports.setup = function(gpio){
   _gpio = gpio;
   _gpio.setup(yellowLed, _gpio.DIR_OUT,yellowReady);
@@ -35,8 +33,12 @@ exports.setup = function(gpio){
 exports.setFaultStatus = function(object,status){
   deviceStatus[object] = status;
 }
+exports.initFaultStatus = function(status){
+  deviceStatus = status;
+  console.log(_.values(deviceStatus));
+}
 exports.faultCode = function(){
-  for (var status in faultStatus) {
+  for (var status in deviceStatus) {
    if (deviceStatus.hasOwnProperty(status)) {
      console.log(status + "="+deviceStatus[status]);
     }

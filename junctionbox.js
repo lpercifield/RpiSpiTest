@@ -51,9 +51,9 @@ function registerTimoloEvents(){
   // NOTE: register timolo message event
   timolo.on('message', function (message) {
     // received a message sent from the Python script (a simple "print" statement)
-    console.log("Timolo " + message.hasOwnProperty('timolo'));
-    console.log("Motion " + message.hasOwnProperty('motion'));
-    console.log("Timelapse " + message.hasOwnProperty('timelapse'));
+    // console.log("Timolo " + message.hasOwnProperty('timolo'));
+    // console.log("Motion " + message.hasOwnProperty('motion'));
+    // console.log("Timelapse " + message.hasOwnProperty('timelapse'));
     console.log(message);
   });
   timolo.on('error', function (message) {
@@ -81,7 +81,7 @@ async.series({
         if(err){
           console.log("AM2302 failed to initialize");
         }else{
-          leds.setFaultStatus("AM2302",true);
+          //leds.setFaultStatus("AM2302",true);
           //console.log("tempSensor ready");
           callback(null, true);
         }
@@ -134,31 +134,16 @@ async.series({
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
     if(err) console.error(err);
-    console.log(JSON.stringify(results));
+    leds.initFaultStatus(result);
+    //console.log(JSON.stringify(results));
 });
-
-// usbDevices.deviceIds(function(err,results){
-//   if(err){
-//     console.error(err);
-//   }else{
-//     console.log(JSON.stringify(results));
-//   }
-// });
-
-
-
-
-
-
-
-
-
 
 function on_exit(){
      console.log('Process Exit');
-     //pfio.deinit();
-     //monitor.stop();
-     //rfid.kill("SIGINT");
+     timolo.end(function (err) {
+       if (err) throw err;
+       console.log('TIMOLO finished');
+     });
      process.exit(0)
  }
 
