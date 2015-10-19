@@ -37,18 +37,18 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: "(\d+)\n/;
           var imei = stdout.match(imeiRX);
           var iccid = stdout.match(iccidRX);
-          if(imei == null || iccid == null){
-            var obj = {};
+          var obj = {};
+          if(imei == null){
             obj["imei"] = false;
-            obj["iccid"] = false;
-            callback(null,obj);
           }else{
-            var obj = {};
             obj["imei"] = imei[1];
-            obj["iccid"] = iccid[1];
-            callback(null,obj);
-            console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
           }
+          if(iccid == null){
+            obj["iccid"] = false;
+          }else{
+            obj["iccid"] = iccid[1];
+          }
+          callback(null,obj);
         }
         if (stdout){
           console.log("stdout "+stdout);
@@ -56,18 +56,18 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: "(\d+)\n/;
           var imei = stdout.match(imeiRX);
           var iccid = stdout.match(iccidRX);
-          if(imei == null || iccid == null){
-            var obj = {};
+          var obj = {};
+          if(imei == null){
             obj["imei"] = false;
-            obj["iccid"] = false;
-            callback(null,obj);
           }else{
-            var obj = {};
             obj["imei"] = imei[1];
-            obj["iccid"] = iccid[1];
-            callback(null,obj);
-            console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
           }
+          if(iccid == null){
+            obj["iccid"] = false;
+          }else{
+            obj["iccid"] = iccid[1];
+          }
+          callback(null,obj);
 
         }
         if (stderr){
@@ -76,18 +76,18 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: "(\d+)"\n/;
           var imei = stderr.match(imeiRX);
           var iccid = stderr.match(iccidRX);
-          if(imei == null || iccid == null){
-            var obj = {};
+          var obj = {};
+          if(imei == null){
             obj["imei"] = false;
-            obj["iccid"] = false;
-            callback(null,obj);
           }else{
-            var obj = {};
             obj["imei"] = imei[1];
-            obj["iccid"] = iccid[1];
-            callback(null,obj);
-            //console.log("imei: " + imei[1] + " iccid: " + iccid[1]);
           }
+          if(iccid == null){
+            obj["iccid"] = false;
+          }else{
+            obj["iccid"] = iccid[1];
+          }
+          callback(null,obj);
         }// throw stderr;
       });
     }
