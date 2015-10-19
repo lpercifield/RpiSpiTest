@@ -5,7 +5,7 @@ var huaweicmd = "/usr/bin/lsusb | /bin/egrep Huawei";
 var cellcmd = "/usr/bin/wvdial IMEI; exit 0";
 
 exports.deviceIds = function(callbackMain){
-  async.parallel({
+  async.series({
     ralink: function(callback){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
         if (error) callback(null,false);
