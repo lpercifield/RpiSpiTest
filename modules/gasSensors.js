@@ -19,7 +19,7 @@ exports.setup = function(gpio,spi,spi_bus,callback){
   _gpio = gpio;
   _SPI = spi;
   _gpio.setup(mq7pin, _gpio.DIR_OUT,function(){_gpio.write(mq7pin, 1, on);});
-  spiLocal = new _SPI.Spi(spi_bus, {
+  spiLocal = new _SPI.Spi(spi_bus.toString(), {
       'mode': _SPI.MODE['MODE_0'],  // always set mode as the first option
       'chipSelect': _SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
