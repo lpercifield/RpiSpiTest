@@ -62,8 +62,8 @@ tempSensor.events.on('data',function(sensorData){
   dataObject.am2302 = sensorData;
 });
 audio.events.on('data',function(audioArray){
-  console.log(audioArray.toString());
-  //console.log(JSON.stringify(audioData));
+  //console.log(audioArray.toString());
+  console.log(JSON.stringify(audioArray));
 })
 function registerTimoloEvents(){
   // NOTE: register timolo message event
@@ -159,6 +159,8 @@ function(err, results) {
 
 function on_exit(){
      console.log('Process Exit');
+     SPI.close();
+     gpio.destroy();
      timolo.end(function (err) {
        if (err) throw err;
        console.log('TIMOLO finished');

@@ -11,7 +11,7 @@ var localSpi;
 var sampleinterval;
 var averageinterval;
 var audioArray = [];
-var eventIntervalTime = 60000; //120000
+var eventIntervalTime = 12000; //120000
 var eventInterval;
 var audioDataIntervalTime = 30000;
 var audioDataInterval;
