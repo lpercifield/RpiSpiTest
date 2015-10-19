@@ -2,7 +2,7 @@ var EventEmitter = require('events'),
 events = new EventEmitter();
 var average = [];
 var lastAverage;
-var averageNumber = 400;
+var averageNumber = 600;
 var averageCount =0;
 var signalMax = 0;
 var signalMin = 4096;
@@ -11,11 +11,12 @@ var localSpi;
 var sampleinterval;
 var averageinterval;
 var audioArray = [];
-var eventIntervalTime = 60000;
+var eventIntervalTime = 60000; //120000
 var eventInterval;
-var audioDataIntervalTime = 20000;
+var audioDataIntervalTime = 30000;
 var audioDataInterval;
 var maxPeak = 0;
+var minPeak = 4096;
 
 var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
 var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
@@ -64,6 +65,9 @@ function startReadings(){
    if(peakToPeak > maxPeak){
      maxPeak = peakToPeak;
    }
+   if(peakToPeak < minPeak){
+     minPeak = peakToPeak;
+   }
    average.push(peakToPeak);
    if(average.length == averageNumber){
      var first = average.shift();
@@ -83,9 +87,10 @@ function startReadings(){
     }
     outString += "*";
     maxPeak = 0;
+    minPeak = 4096;
     average = [];
     console.log(outString);
-    var micData = {"average":value,"max":maxPeak};
+    var micData = {"average":value,"max":maxPeak,"min":minPeak};
     audioArray.push(micData);
   },audioDataIntervalTime)
 }
