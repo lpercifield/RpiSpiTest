@@ -14,9 +14,9 @@ exports.deviceIds = function(callbackMain){
           var ralinkObj = {};
           var lines = str.split(/(\r?\n)/g);
           if(lines.length > 1){
-            lines.slice(1);
+            lines.splice(2,1);
+            console.log(lines.toString());
           }
-          console.log(lines.toString());
             for (var i=0; i<lines.length; i++) {
               var str = "wlan"+i;
               // Process the line, noting it might be incomplete.
