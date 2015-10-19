@@ -10,7 +10,10 @@ var options = {
 //var timolo = new PythonShell('pi-timolo.py',options);
 var timolo = PythonShell.run('pi-timolo.py',options, function (err, results) {
   // script finished
-  if(err)console.error(err);
+  if(err){
+    console.log("CALLING ERROR HERE");
+    console.error(err);
+  }
   if(results) console.log(results);
 });
 
