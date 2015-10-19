@@ -24,9 +24,9 @@ timolo.on('message', function (message) {
   console.log("Timelapse " + message.hasOwnProperty('timelapse'));
   console.log(message);
 });
-// timolo.on('error', function (message) {
-//   console.error(message);
-// });
+timolo.on('error', function (message) {
+  console.error(message);
+});
 timolo.on('close', function (message) {
   console.log(message);
 });
