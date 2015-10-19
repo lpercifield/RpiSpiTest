@@ -58,14 +58,17 @@ function checkValues(callback){
     if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
       amReset(function(){
         var reading = sensor.read();
+        console.log("after reset: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
         if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
           callback(false);
+        }else{
+          callback();
         }
       });
     }else{
       console.log("AM2302 check ok!");
       //var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
-      callback(null);
+      callback();
       startReadings();
       //events.emit('data',obj);
     }
