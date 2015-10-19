@@ -15,11 +15,12 @@ exports.deviceIds = function(callbackMain){
           var lines = str.split(/(\r?\n)/g);
           console.log(lines.toString());
             for (var i=0; i<lines.length; i++) {
+              var str = "wlan"+i;
               // Process the line, noting it might be incomplete.
-              ralinkObj.wlan0 = lines[0];
+              ralinkObj[str] = lines[i];
             }
             if(lines.length <=1){
-              ralinkObjwlan1 = false;
+              ralinkObj.wlan1 = false;
             }
           //TODO: check for second device
           //console.log(str);
