@@ -36,7 +36,7 @@ exports.setFaultStatus = function(object,status){
 exports.initFaultStatus = function(status){
   deviceStatus = status;
   var result = [];
-  _.chain(obj).filter(_.isObject).each(function(t) {
+  _.chain(deviceStatus).filter(_.isObject).each(function(t) {
       _(t).each(function(val, key) {
           if(val === true)
               result.push(t['item' + key.charAt(0).toUpperCase() + key.substr(1)])
