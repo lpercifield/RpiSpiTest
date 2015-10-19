@@ -75,7 +75,7 @@ function startReadings(){
     events.emit('data',audioArray.slice(0));
     audioArray = [];
   },eventIntervalTime);
-  audioDataInterval = setInterval(function{
+  audioDataInterval = setInterval(function(){
     var value = medianFun(average.slice(0));
     var outString = "median value is " + value;
     for(var i = 0; i<maxPeak/10;i++){
