@@ -103,6 +103,7 @@ var amReset = function(callback){
   setTimeout(function(){
     _gpio.write(AM_RESET_PIN,1,function(err){
       if (err){
+        console.error(err);
         callback(err);
       } else{
         console.log('Power On AM2302');
