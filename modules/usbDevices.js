@@ -10,10 +10,19 @@ exports.deviceIds = function(callbackMain){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
         if (error) callback(null,false);
         if (stdout){
-          var str = stdout.toString().trim();
+          //var str = stdout.toString().trim();
+          var ralinkObj = {};
+          var str = data.toString(), lines = str.split(/(\r?\n)/g);
+            for (var i=0; i<lines.length; i++) {
+              // Process the line, noting it might be incomplete.
+              ralinkObj.wlan0 = lines[0];
+            }
+            if(lines.length <=1){
+              ralinkObjwlan1 = false;
+            }
           //TODO: check for second device
           //console.log(str);
-          callback(null,str);
+          callback(null,ralinkObj);
         }
         if (stderr) callback(null,false);
       });
