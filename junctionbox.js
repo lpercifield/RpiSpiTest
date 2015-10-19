@@ -97,11 +97,11 @@ async.series({
       // NOTE: setup tempSensor
       tempSensor.setup(gpio,config.get("am2302_data_pin"),config.get("am2302_reset_pin"),function(err){
         if(err){
-          console.log("AM2302 failed to initialize");
+          //console.log("AM2302 failed to initialize");
           callback(null, false);
         }else{
           //leds.setFaultStatus("AM2302",true);
-          console.log("tempSensor ready");
+          //console.log("tempSensor ready");
           callback(null, true);
         }
       });
@@ -153,7 +153,7 @@ async.series({
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
     if(err) console.error(err);
-    //leds.initFaultStatus(results);
+    leds.initFaultStatus(results);
     console.log(JSON.stringify(results));
 });
 

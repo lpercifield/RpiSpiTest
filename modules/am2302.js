@@ -54,21 +54,21 @@ var sensor = {
 function checkValues(callback){
   try {
     var reading = sensor.read();
-    console.log("HERE: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
+    //console.log("HERE: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
     if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
       amReset(function(){
         var reading2 = sensor.read();
-        console.log("after reset: temp: "+reading2.temperature.toFixed(1)+ " humidity: "+reading2.humidity.toFixed(1));
+        //console.log("after reset: temp: "+reading2.temperature.toFixed(1)+ " humidity: "+reading2.humidity.toFixed(1));
         if(reading2.temperature.toFixed(1)==0.0 || reading2.humidity.toFixed(1) ==0.0){
           callback(false);
         }else{
-          console.log("calling back from am2302");
+          //console.log("calling back from am2302");
           callback();
           startReadings();
         }
       });
     }else{
-      console.log("AM2302 check ok!");
+      //console.log("AM2302 check ok!");
       //var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
       callback();
       startReadings();
@@ -97,10 +97,10 @@ exports.read = function(){
 
 
 var amReset = function(callback){
-   console.log("Starting AMRESET")
+   //console.log("Starting AMRESET")
   _gpio.write(AM_RESET_PIN,0,function(err){
     if (err) callback(err);
-    console.error('RESETTING AM2302');
+    //console.error('RESETTING AM2302');
   });
   setTimeout(function(){
     _gpio.write(AM_RESET_PIN,1,function(err){
@@ -108,7 +108,7 @@ var amReset = function(callback){
         console.error(err);
         callback(err);
       } else{
-        console.log('Power On AM2302');
+        //console.log('Power On AM2302');
         resetCount ++;
         setTimeout(function(){
           callback();

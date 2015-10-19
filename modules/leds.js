@@ -42,7 +42,7 @@ exports.initFaultStatus = function(status){
             console.log(v)
        })
     }else{
-      console.log(_.values);
+      console.log(val);
     }
 })
 }

@@ -86,13 +86,13 @@ function startReadings(){
   },eventIntervalTime);
   audioDataInterval = setInterval(function(){
     var value = medianFun(average.slice(0));
-    var outString = "median value is " + value;
-    for(var i = 0; i<maxPeak/10;i++){
-     outString += " ";
-    }
-    outString += "*";
-    console.log(outString);
-    var micData = {"average":value,"max":maxPeak,"min":minPeak};
+    // var outString = "median value is " + value;
+    // for(var i = 0; i<maxPeak/10;i++){
+    //  outString += " ";
+    // }
+    // outString += "*";
+    // console.log(outString);
+    var micData = {"median":value,"max":maxPeak,"min":minPeak};
     maxPeak = 0;
     minPeak = 4096;
     average = [];
