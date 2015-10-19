@@ -118,7 +118,7 @@ async.series({
           if(message.hasOwnProperty('timolo')){
             callback(null, true);
           }
-        }
+        });
         timolo.on('error', function (message) {
           //console.error(message);
           callback(null, false);
