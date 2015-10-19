@@ -38,30 +38,7 @@ config.use('file', { file: './config/default.json' });
 // NOTE: setup LEDS
 leds.setup(gpio);
 
-///////////////////// EVENTS /////////////////////////
-// NOTE: register events from gas sensors
-gasSensors.events.on('data', function(sensorData) {
-  //console.log('gasSensors have data');
-  console.log(JSON.stringify(sensorData));
-})
-audio.events.on('data',function(audioData){
-  console.log(JSON.stringify(audioData));
-})
-// NOTE: register timolo message event
-timolo.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-  console.log("Timolo " + message.hasOwnProperty('timolo'));
-  console.log("Motion " + message.hasOwnProperty('motion'));
-  console.log("Timelapse " + message.hasOwnProperty('timelapse'));
-  console.log(message);
-});
-timolo.on('error', function (message) {
-  console.error(message);
-});
-timolo.on('close', function (message) {
-  console.log(message);
-});
-//////////////////////////////////////////////////////
+
 
 //NOTE: Empty timolo directories
 fs.emptyDir('/home/pi/pi-timolo/motion', function (err) {
@@ -133,6 +110,31 @@ function(err, results) {
     if(err) console.error(err);
     console.log(JSON.stringify(results));
 });
+
+///////////////////// EVENTS /////////////////////////
+// NOTE: register events from gas sensors
+gasSensors.events.on('data', function(sensorData) {
+  //console.log('gasSensors have data');
+  console.log(JSON.stringify(sensorData));
+})
+audio.events.on('data',function(audioData){
+  console.log(JSON.stringify(audioData));
+})
+// NOTE: register timolo message event
+timolo.on('message', function (message) {
+  // received a message sent from the Python script (a simple "print" statement)
+  console.log("Timolo " + message.hasOwnProperty('timolo'));
+  console.log("Motion " + message.hasOwnProperty('motion'));
+  console.log("Timelapse " + message.hasOwnProperty('timelapse'));
+  console.log(message);
+});
+timolo.on('error', function (message) {
+  console.error(message);
+});
+timolo.on('close', function (message) {
+  console.log(message);
+});
+//////////////////////////////////////////////////////
 
 // usbDevices.deviceIds(function(err,results){
 //   if(err){
