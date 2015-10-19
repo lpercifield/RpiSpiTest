@@ -35,14 +35,14 @@ exports.setFaultStatus = function(object,status){
 }
 exports.initFaultStatus = function(status){
   deviceStatus = status;
-  var result = [];
-  _.chain(deviceStatus).filter(_.isObject).each(function(t) {
-      _(t).each(function(val, key) {
-          //if(val === true)
-          result.push(t['item' + key.charAt(0).toUpperCase() + key.substr(1)])
-      })
-  });
-  console.log(result.toString());
+  //console.log(_.values(deviceStatus));
+  _.each(deviceStatus, function(val) {
+    if (_.isObject(val)) {
+       _.each(val, function(v) {
+            console.log(v)
+       })
+    }
+})
 }
 exports.faultCode = function(){
   for (var status in deviceStatus) {
