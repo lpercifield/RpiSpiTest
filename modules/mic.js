@@ -11,7 +11,7 @@ var localSpi;
 var sampleinterval;
 var averageinterval;
 var audioArray = [];
-var eventIntervalTime = 12000; //120000
+var eventIntervalTime = 120000; //120000
 var eventInterval;
 var audioDataIntervalTime = 30000;
 var audioDataInterval;
@@ -22,7 +22,7 @@ var txbuf = new Buffer([ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]);
 var rxbuf = new Buffer([ 0x00, 0x00, 0x00]);
 exports.events = events;
 exports.setup = function(SPI,spi_bus,callback){
-  localSpi = new SPI.Spi('/dev/spidev0.1', {
+  localSpi = new SPI.Spi(spi_bus.toString(), {
       'mode': SPI.MODE['MODE_0'],  // always set mode as the first option
       'chipSelect': SPI.CS['none'] // 'none', 'high' - defaults to low
     }, function(s){
