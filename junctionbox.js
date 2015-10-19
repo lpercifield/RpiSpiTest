@@ -101,7 +101,7 @@ async.series({
           callback(null, false);
         }else{
           //leds.setFaultStatus("AM2302",true);
-          //console.log("tempSensor ready");
+          console.log("tempSensor ready");
           callback(null, true);
         }
       });

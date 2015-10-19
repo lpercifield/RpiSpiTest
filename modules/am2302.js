@@ -62,6 +62,7 @@ function checkValues(callback){
         if(reading.temperature.toFixed(1)==0.0 || reading.humidity.toFixed(1) ==0.0){
           callback(false);
         }else{
+          console.log("calling back from am2302");
           callback();
           startReadings();
         }

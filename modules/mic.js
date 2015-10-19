@@ -91,11 +91,11 @@ function startReadings(){
      outString += " ";
     }
     outString += "*";
+    console.log(outString);
+    var micData = {"average":value,"max":maxPeak,"min":minPeak};
     maxPeak = 0;
     minPeak = 4096;
     average = [];
-    console.log(outString);
-    var micData = {"average":value,"max":maxPeak,"min":minPeak};
     audioArray.push(micData);
   },audioDataIntervalTime)
 }
