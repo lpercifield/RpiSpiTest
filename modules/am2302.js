@@ -16,7 +16,8 @@ exports.events = events;
 //gpio.setup(AM_PIN, gpio.DIR_OUT);
 exports.setup = function(gpio,dataPin,resetPin,callback){
   _gpio = gpio;
-  AM_PIN = parseInt(dataPin);
+  //AM_PIN = parseInt(dataPin);
+  AM_PIN = 17;
   //AM_RESET_PIN = parseInt(resetPin);
   AM_RESET_PIN = 15;
   _gpio.setup(AM_RESET_PIN, _gpio.DIR_OUT, function(err){
