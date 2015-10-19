@@ -14,7 +14,7 @@ exports.deviceIds = function(callbackMain){
           var ralinkObj = {};
           var lines = str.split(/(\r?\n)/g);
           if(lines.length > 1){
-            lines.splice(2,1);
+            lines.splice(1,1);
             console.log(lines.toString());
           }
             for (var i=0; i<lines.length; i++) {
