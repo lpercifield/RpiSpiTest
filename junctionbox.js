@@ -95,7 +95,7 @@ fs.emptyDir('/home/pi/pi-timolo/timelapse', function (err) {
 async.series({
     am2302: function(callback){
       // NOTE: setup tempSensor
-      tempSensor.setup(gpio,function(err){
+      tempSensor.setup(gpio,config.get("am2302_data_pin"),config.get("am2302_reset_pin"),function(err){
         if(err){
           console.log("AM2302 failed to initialize");
           callback(null, false);

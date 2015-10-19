@@ -12,8 +12,10 @@ exports.events = events;
 
 //console.log("before gpio setup");
 //gpio.setup(AM_PIN, gpio.DIR_OUT);
-exports.setup = function(gpio,callback){
+exports.setup = function(gpio,dataPin,resetPin,callback){
   _gpio = gpio;
+  AM_PIN = dataPin;
+  AM_RESET_PIN = resetPin;
   _gpio.setup(AM_RESET_PIN, _gpio.DIR_OUT, function(err){
     if (err){
       console.error(err);
@@ -73,6 +75,7 @@ var amReset = function(callback){
       } else{
         //console.log('Power On AM2302');
         setTimeout(callback,1000);
+        //TODO check sensor values before calling back
       }
     });
   },5000);
