@@ -62,6 +62,7 @@ function checkValues(callback){
     }else{
       //var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
       callback(true);
+      startReadings();
       //events.emit('data',obj);
     }
   } catch (e) {

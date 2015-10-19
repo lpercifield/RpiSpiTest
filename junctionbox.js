@@ -85,10 +85,10 @@ function registerTimoloEvents(){
 
 //Empty timolo directories
 fs.emptyDir('/home/pi/pi-timolo/motion', function (err) {
-  if (!err) console.log('success!')
+  if (err) console.error(err)
 })
 fs.emptyDir('/home/pi/pi-timolo/timelapse', function (err) {
-  if (!err) console.log('success!')
+  if (err) console.error(err)
 })
 
 
