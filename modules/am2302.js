@@ -63,6 +63,7 @@ function checkValues(callback){
           callback(false);
         }else{
           callback();
+          startReadings();
         }
       });
     }else{
