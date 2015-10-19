@@ -61,6 +61,7 @@ function checkValues(callback){
         }
       });
     }else{
+      console.log("AM2302 check ok!");
       //var obj = {"temperature":reading.temperature.toFixed(1),"humidity":reading.humidity.toFixed(1)};
       callback(true);
       startReadings();
