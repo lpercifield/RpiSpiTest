@@ -42,7 +42,7 @@ exports.initFaultStatus = function(status){
          if (_.isObject(v)) {
            _.each(val, function(v1) {
              console.log(v1)
-           }
+           })
          }else{
            console.log(v)
          }
