@@ -115,7 +115,7 @@ async.series({
     },
     camera: function(callback){
       // NOTE: create timolo instance
-        timolo = new PythonShell('pi-timolo.py',options);
+        timolo = new PythonShell('pi-timolo.py',timoloOptions);
         timolo.on('message', function (message) {
           if(message.hasOwnProperty('timolo')){
             registerTimoloEvents();
