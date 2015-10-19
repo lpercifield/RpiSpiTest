@@ -1,3 +1,4 @@
+var fs = require('fs-extra');
 var gpio = require('rpi-gpio');
 var SPI = require('spi');
 var config = require('nconf');
@@ -10,6 +11,13 @@ var gasSensors = require("./modules/gasSensors.js");
 var usbDevices = require("./modules/usbDevices.js");
 var mainInterval;
 var mainLoopTime = 60000;
+var timolo;
+// NOTE: options for setting up pi-timolo
+var timoloOptions = {
+  mode: 'json',
+  scriptPath: '/home/pi/pi-timolo'
+};
+
 config.use('file', { file: './config/default.json' });
 
 // var faultStatus = {
@@ -39,7 +47,24 @@ gasSensors.events.on('data', function(sensorData) {
 audio.events.on('data',function(audioData){
   console.log(JSON.stringify(audioData));
 })
+// NOTE: register timolo message event
+timolo.on('message', function (message) {
+  // received a message sent from the Python script (a simple "print" statement)
+  console.log("Timolo " + message.hasOwnProperty('timolo'));
+  console.log("Motion " + message.hasOwnProperty('motion'));
+  console.log("Timelapse " + message.hasOwnProperty('timelapse'));
+  console.log(message);
+});
 //////////////////////////////////////////////////////
+
+//NOTE: Empty timolo directories
+fs.emptyDir('/home/pi/pi-timolo/motion', function (err) {
+  if (!err) console.log('success!')
+})
+fs.emptyDir('/home/pi/pi-timolo/timelapse', function (err) {
+  if (!err) console.log('success!')
+})
+
 
 async.series({
     am2302: function(callback){
@@ -81,6 +106,11 @@ async.series({
         });
     },
     camera: function(callback){
+      // NOTE: create timolo instance
+        timolo = new PythonShell('pi-timolo.py',options);
+        // PythonShell.run('script.py', function (err, results) {
+        //   // script finished
+        // });
         callback(null, false);
     },
     ethernet: function(callback){
@@ -104,24 +134,21 @@ function(err, results) {
 
 
 
-// // NOTE: options for setting up pi-timolo
-// var options = {
-//   mode: 'json',
-//   scriptPath: '/home/pi/pi-timolo'
-// };
-// // NOTE: create timolo instance
-// var timolo = new PythonShell('pi-timolo.py',options);
-//
-// // NOTE: register timolo message event
-// timolo.on('message', function (message) {
-//   // received a message sent from the Python script (a simple "print" statement)
-//   console.log("Timolo " + message.hasOwnProperty('timolo'));
-//   console.log("Motion " + message.hasOwnProperty('motion'));
-//   console.log("Timelapse " + message.hasOwnProperty('timelapse'));
-//   console.log(message);
-// });
 
 
+
+
+
+
+function on_exit(){
+     console.log('Process Exit');
+     //pfio.deinit();
+     //monitor.stop();
+     //rfid.kill("SIGINT");
+     process.exit(0)
+ }
+
+ process.on('SIGINT',on_exit);
 
 
 

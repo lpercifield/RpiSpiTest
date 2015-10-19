@@ -7,7 +7,12 @@ var options = {
   mode: 'json',
   scriptPath: '/home/pi/pi-timolo'
 };
-var timolo = new PythonShell('pi-timolo.py',options);
+//var timolo = new PythonShell('pi-timolo.py',options);
+var timolo = PythonShell.run('pi-timolo.py',options, function (err, results) {
+  // script finished
+  if(err)console.error(err);
+  if(results) console.log(results);
+});
 
 timolo.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
