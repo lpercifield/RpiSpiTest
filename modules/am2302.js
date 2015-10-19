@@ -53,7 +53,7 @@ function checkValues(callback){
   try {
     var reading = sensor.read();
     console.log("HERE: temp: "+reading.temperature.toFixed(1)+ " humidity: "+reading.humidity.toFixed(1));
-    if(reading.temperature.toFixed(1)<=0.0 || reading.humidity.toFixed(1) <=0.0){
+    if(reading.temperature.toFixed(1)===0.0 || reading.humidity.toFixed(1) ===0.0){
       amReset(function(){
         var reading = sensor.read();
         if(reading.temperature.toFixed(1)<=0.0 || reading.humidity.toFixed(1) <=0.0){
