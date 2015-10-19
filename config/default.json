@@ -19,7 +19,7 @@
    "airq_capable": "true",
    "airq_adc_pin": "2",
    "microphone_capable": "true",
-   "microphone_spi_bus": "'/dev/spidev0.1'",
+   "microphone_spi_bus": "/dev/spidev0.1",
    "microphone_adc_pin": "1",
    "am2302_capable": "true",
    "am2302_data_pin": "17",
