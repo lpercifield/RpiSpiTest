@@ -153,8 +153,8 @@ async.series({
 function(err, results) {
     // results is now equal to: {am2302: 1, ext: 2...}
     if(err) console.error(err);
-    leds.initFaultStatus(results);
-    //console.log(JSON.stringify(results));
+    //leds.initFaultStatus(results);
+    console.log(JSON.stringify(results));
 });
 
 function on_exit(){
