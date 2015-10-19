@@ -10,9 +10,10 @@ exports.deviceIds = function(callbackMain){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
         if (error) callback(null,false);
         if (stdout){
-          //var str = stdout.toString().trim();
+          var str = stdout.toString().trim();
           var ralinkObj = {};
-          var str = stdout.toString(), lines = str.split(/(\r?\n)/g);
+          var lines = str.split(/(\r?\n)/g);
+          console.log(lines.toString());
             for (var i=0; i<lines.length; i++) {
               // Process the line, noting it might be incomplete.
               ralinkObj.wlan0 = lines[0];
