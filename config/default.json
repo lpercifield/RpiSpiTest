@@ -1,7 +1,10 @@
 {
    "aws": {
       "key": "234234",
-      "secret": "234wefewrwe"
+      "secret": "234wefewrwe",
+      "imagebucket": "s3-bucket-name",
+      "videobucket": "s3-bucket-name",
+      "sqsname": "sqs-bucket-name"
    },
    "iccid": "12380342230893",
    "imei": "234235245425",
@@ -26,12 +29,15 @@
    "am2302_reset_pin": "15",
    "external_flood_1": "33",
    "external_flood_2": "35",
-   "external_flood_3": "37",
+   "external_flood_3": "35",
    "firmware_update_interval_broadband": "3600",
    "firmware_update_interval_cell": "86400",
    "firmware_update_url": "http://firmware.junction.com/updateme",
    "external_capable": "true",
    "failsafe_phone_home": "http://helpme.junction.com/help",
    "error_reporting_url": "http://www.junction.com/errorlog",
-   "local_node_server_port": "80"
+   "local_node_server_port": "80",
+   "last_updated": "2015-10-20 11:02:00+00",
+   "firmware_version": "0.1",
+   "firmware_url": "https://www.junction.com/firmware"
 }
