@@ -8,8 +8,9 @@ exports.deviceIds = function(callbackMain){
   async.series({
     ralink: function(callback){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
-        if (error){ callback(null,false)};
-        else if (stdout){
+        if (error){
+          callback(null,false);
+        }else if (stdout){
           var str = stdout.toString().trim();
           var ralinkObj = {};
           var lines = str.split(/(\r?\n)/g);
