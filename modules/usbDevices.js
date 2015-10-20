@@ -8,8 +8,8 @@ exports.deviceIds = function(callbackMain){
   async.series({
     ralink: function(callback){
       cp.exec(ralinkcmd,function(error,stdout,stderr){
-        if (error) callback(null,false);
-        if (stdout){
+        if (error){ callback(null,false)};
+        else if (stdout){
           var str = stdout.toString().trim();
           var ralinkObj = {};
           var lines = str.split(/(\r?\n)/g);
@@ -29,7 +29,7 @@ exports.deviceIds = function(callbackMain){
           //console.log(str);
           callback(null,ralinkObj);
         }
-        if (stderr) callback(null,false);
+        else if (stderr) callback(null,false);
       });
     },
     huawei: function(callback){

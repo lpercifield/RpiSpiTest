@@ -139,12 +139,14 @@ async.series({
           if(message.hasOwnProperty('timolo')){
             registerTimoloEvents();
             callback(null, true);
+          }else{
+            callback(null, false);
           }
         });
-        timolo.on('error', function (message) {
-          //console.error(message);
-          callback(null, false);
-        });
+        // timolo.on('error', function (message) {
+        //   //console.error(message);
+        //   callback(null, false);
+        // });
     },
     ethernet: function(callback){
         callback(null, false);
