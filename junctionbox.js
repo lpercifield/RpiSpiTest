@@ -20,7 +20,7 @@ var timolo;
  */
 var timoloOptions = {
   mode: 'json',
-  scriptPath: '/home/pi/pi-timolo'
+  scriptPath: '/pi-timolo'
 };
 
 config.use('file', { file: './config/default.json' });
