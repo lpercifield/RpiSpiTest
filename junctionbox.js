@@ -64,12 +64,14 @@ gasSensors.events.on('data', function(sensorData) {
 })
 
 tempSensor.events.on('data',function(sensorData){
-  console.log(JSON.stringify(sensorData));
-  dataObject.am2302 = sensorData;
+  //console.log(JSON.stringify(sensorData));
+  DATA.temperature = sensorData.temperature;
+  DATA.humidity = sensorData.humidity;
 });
 audio.events.on('data',function(audioArray){
   //console.log(audioArray.toString());
-  console.log(JSON.stringify(audioArray));
+  //console.log(JSON.stringify(audioArray));
+  DATA.audio = audioArray;
 })
 function registerTimoloEvents(){
   // NOTE: register timolo message event
@@ -191,6 +193,7 @@ function mainLoop(){
   cputemp = ((cputemp/1000).toPrecision(3)) + "°C";
   DATA.cputemp = cputemp;
   DATA.diskspace = usbDevices.getDiskSpace();
+  console.log(JSON.stringify(DATA));
 }
 
 function constructData(results){
