@@ -185,6 +185,10 @@ function(err, results) {
     leds.initFaultStatus(results);
     console.log(JSON.stringify(results));
     constructData(results);
+    request.sendPost(results,"/boot",function(err,body){
+      //status = body;
+      //console.log(status);
+    })
 });
 
 
@@ -201,12 +205,8 @@ function mainLoop(){
   DATA.diskspace = usbDevices.getDiskSpace();
   console.log(JSON.stringify(DATA));
   request.sendPost(DATA,"/junctionbox",function(err,body){
-    status = body;
-    console.log(status);
-  // if(status.session === false && status.online === true){
-  //   console.log("TRUE");
-  //   pfio.digital_write(6,1);
-  // }
+    //status = body;
+    //console.log(status);
   })
 }
 
