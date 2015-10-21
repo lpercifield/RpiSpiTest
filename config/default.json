@@ -39,5 +39,6 @@
    "local_node_server_port": "80",
    "last_updated": "2015-10-20 11:02:00+00",
    "firmware_version": "0.1",
-   "firmware_url": "https://www.junction.com/firmware"
+   "firmware_url": "https://www.junction.com/firmware",
+   "devhost": "http://192.168.2.210:1880"
 }

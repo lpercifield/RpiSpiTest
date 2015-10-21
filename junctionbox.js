@@ -7,11 +7,13 @@ var PythonShell = require('python-shell');
 var uuid = require('node-uuid');
 
 
+
 var leds = require("./modules/leds.js");
 var audio = require("./modules/mic.js");
 var tempSensor = require("./modules/am2302.js");
 var gasSensors = require("./modules/gasSensors.js");
 var usbDevices = require("./modules/usbDevices.js");
+var request = require("./modules/request.js");
 var dataObject = {};
 var mainInterval;
 var mainLoopTime = 60000;
@@ -26,6 +28,7 @@ var timoloOptions = {
 };
 
 config.use('file', { file: './config/default.json' });
+request.setup(config.get('devhost'));
 
 var DATA = {};
 
@@ -48,6 +51,7 @@ var DATA = {};
 // }
 // NOTE: setup LEDS
 leds.setup(gpio);
+
 
 ///////////////////// EVENTS /////////////////////////
 //register events from gas sensors
@@ -196,6 +200,14 @@ function mainLoop(){
   DATA.cputemp = cputemp;
   DATA.diskspace = usbDevices.getDiskSpace();
   console.log(JSON.stringify(DATA));
+  request.sendPost(DATA,"/junctionbox",function(err,body){
+    status = body;
+    console.log(status);
+  // if(status.session === false && status.online === true){
+  //   console.log("TRUE");
+  //   pfio.digital_write(6,1);
+  // }
+  })
 }
 
 function constructData(results){
