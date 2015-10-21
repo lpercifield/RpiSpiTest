@@ -101,12 +101,14 @@ exports.deviceIds = function(callbackMain){
 
         }
         if (stderr){
-          console.log("stderr "+ stderr);
+          //console.log("stderr "+ stderr);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
           var iccidRX = /\^ICCID: "(\d+)\n/;
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stdout.match(imeiRX);
           var iccidStr = stdout.match(iccidRX)
+          console.log(imei);
+          console.log(iccidStr);
 
           var obj = {};
           if(imei == null){
