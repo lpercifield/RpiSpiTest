@@ -142,5 +142,5 @@ exports.getDiskSpace = function(){
     if(stdout){
       return stdout.toString();
     }
-  }
+  });
 }
