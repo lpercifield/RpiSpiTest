@@ -3,6 +3,8 @@ var cp = require("child_process");
 var ralinkcmd ="/usr/bin/lsusb | /bin/egrep Ralink";
 var huaweicmd = "/usr/bin/lsusb | /bin/egrep Huawei";
 var cellcmd = "/usr/bin/wvdial IMEI; exit 0";
+var getserial = "cat /proc/cpuinfo | grep Serial | cut -d ':' -f 2";
+var diskspacecmd = "df -h | grep -E '^/dev/root' | grep -E ' /$' | awk '{ print $5+0}'";
 
 exports.deviceIds = function(callbackMain){
   async.series({
@@ -16,7 +18,7 @@ exports.deviceIds = function(callbackMain){
           var lines = str.split(/(\r?\n)/g);
           if(lines.length > 1){
             lines.splice(1,1);
-            console.log(lines.toString());
+            //console.log(lines.toString());
           }
             for (var i=0; i<lines.length; i++) {
               var str = "wlan"+i;
@@ -105,6 +107,25 @@ exports.deviceIds = function(callbackMain){
           callback(null,obj);
         }// throw stderr;
       });
+    },
+    serial: function getSerial(callback) {
+      cp.exec(getserial,function(error,stdout,stderr){
+        if (error){
+          console.error(error);
+          callback(error);
+        }
+        if (stdout){
+
+          var str = stdout.toString().trim();
+          //serial = str;
+          //console.log(str);
+          callback(null,str);
+        }
+        if (stderr){
+          console.error(stderr);
+          callback(stderr);
+        }
+      });
     }
 },
 function(err, results) {
@@ -112,4 +133,14 @@ function(err, results) {
     callbackMain(err,results);
 });
 
+}
+
+exports.getDiskSpace = function(){
+  cp.exec(diskspacecmd,function(error,stdout,stderr){
+    if(error) console.error(error)
+    if(stderr) console.error(stderr);
+    if(stdout){
+      return stdout.toString();
+    }
+  }
 }

@@ -4,6 +4,8 @@ var SPI = require('spi');
 var config = require('nconf');
 var async = require("async");
 var PythonShell = require('python-shell');
+var uuid = require('node-uuid');
+
 
 var leds = require("./modules/leds.js");
 var audio = require("./modules/mic.js");
@@ -24,6 +26,10 @@ var timoloOptions = {
 };
 
 config.use('file', { file: './config/default.json' });
+
+var DATA = {};
+
+//myjson = {"ralink": ralink, "huawei": huawei, "flooding": floodingstate, "diskspace": diskspace, "image_src": "/tmp/lastsnap.jpg", "image_key":  image_name, "ipaddress": ipaddresses() , "temperature": str(temp), "humidity": str(humidity), "lightlevel": str(mylightlevel), "airq": str(airq), "co": str(co), "serialnumber": iccid, "imei": imei, "iccid": iccid, "rpiserial": cpuserial, "cputemp": str(cputemp), "firmware": firmware }
 
 // var faultStatus = {
 //   "AM2302":true,
@@ -72,6 +78,18 @@ function registerTimoloEvents(){
     // console.log("Timolo " + message.hasOwnProperty('timolo'));
     // console.log("Motion " + message.hasOwnProperty('motion'));
     // console.log("Timelapse " + message.hasOwnProperty('timelapse'));
+    if(message.hasOwnProperty('timelapse')){
+      DATA.image_src = message.file;
+      var image_key = DATA.iccid.toString() + uuid.v4()+".jpg"
+      DATA.image_key = image_key;
+    }
+    if(message.hasOwnProperty('motion')){
+      //DATA.image_src = message.file;
+      //TODO Trigger motion event
+    }
+    if(message.hasOwnProperty('light')){
+      DATA.lightlevel = message.level;
+    }
     console.log(message);
   });
   timolo.on('error', function (message) {
@@ -158,7 +176,34 @@ function(err, results) {
     if(err) console.error(err);
     leds.initFaultStatus(results);
     console.log(JSON.stringify(results));
+    constructData(results);
 });
+
+
+// NOTE: setup main loop interval
+mainInterval = setInterval(mainLoop,mainLoopTime);
+
+// NOTE: function that runs when the main interval expires
+function mainLoop(){
+  //var tempReading = tempSensor.read();
+  //console.log("Temp: "+tempReading.temperature.toFixed(1) + " Humidity: "+tempReading.humidity.toFixed(1));
+  var cputemp = fs.readFileSync("/sys/class/thermal/thermal_zone0/temp");
+  cputemp = ((cputemp/1000).toPrecision(3)) + "°C";
+  DATA.cputemp = cputemp;
+  DATA.diskspace = usbDevices.getDiskSpace();
+}
+
+function constructData(results){
+  //"serialnumber": iccid, "imei": imei, "iccid": iccid
+  var r = results;
+  DATA.ralink = r.usb.ralink;
+  DATA.huawei = r.usb.huawei;
+  DATA.serialnumber = r.usb.cell.iccid;
+  DATA.imei = r.usb.cell.imei;
+  DATA.iccid = r.usb.cell.iccid;
+  DATA.rpiserial = r.usb.serial;
+
+}
 
 function on_exit(){
      console.log('Process Exit');
@@ -172,14 +217,3 @@ function on_exit(){
  }
 
  process.on('SIGINT',on_exit);
-
-
-
-// NOTE: setup main loop interval
-mainInterval = setInterval(mainLoop,mainLoopTime);
-
-// NOTE: function that runs when the main interval expires
-function mainLoop(){
-  //var tempReading = tempSensor.read();
-  //console.log("Temp: "+tempReading.temperature.toFixed(1) + " Humidity: "+tempReading.humidity.toFixed(1));
-}
