@@ -121,10 +121,11 @@ exports.deviceIds = function(callbackMain){
             obj["iccid"] = false;
           }else{
             var iccidbuf = new Buffer(iccidStr[1]);
-            console.log(bcd2number(iccidbuf));
-            console.log("Big: " + iccidbuf.readInt32BE());
-            console.log("little: " + iccidbuf.readInt32LE());
-            var iccid = iccidbuf.readUIntBE();
+            var iccid = swap(iccidStr[1].toString())
+            console.log(iccid);
+            //console.log("Big: " + iccidbuf.readInt32BE());
+            //console.log("little: " + iccidbuf.readInt32LE());
+            //var iccid = iccidbuf.readUIntBE();
             obj["iccid"] = iccid;
           }
           callback(null,obj);
@@ -157,17 +158,13 @@ function(err, results) {
 });
 
 }
-
-var bcd2number = function(bcd)
-{
-    var n = 0;
-    var m = 1;
-    for(var i = 0; i<bcd.length; i+=1) {
-        n += (bcd[bcd.length-1-i] & 0x0F) * m;
-        n += ((bcd[bcd.length-1-i]>>4) & 0x0F) * m * 10;
-        m *= 100;
-    }
-    return n;
+function swap(s) {
+  var o = '';
+  for (var i = 0; i < s.length; i+=2){
+    o += s[i+1];
+    o+= s[i];
+  }
+  return o;
 }
 
 exports.getDiskSpace = function(){
