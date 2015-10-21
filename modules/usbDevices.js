@@ -103,7 +103,8 @@ exports.deviceIds = function(callbackMain){
           var iccidRX = /\^ICCID: "(\d+)\n/;
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stdout.match(imeiRX);
-          var iccidbuf = new Buffer(stdout.match(iccidRX));
+          var iccidStr = stdout.match(iccidRX)
+          var iccidbuf = new Buffer(iccidStr);
           console.log("Big: " + iccidbuf.readUIntBE());
           console.log("little: " + iccidbuf.readUIntLE());
           //var imei = imeibuf.readUIntBE();
