@@ -108,8 +108,8 @@ exports.deviceIds = function(callbackMain){
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stderr.match(imeiRX);
           var iccidStr = stderr.match(iccidRX)
-          console.log(imei);
-          console.log(iccidStr);
+          //console.log(imei);
+          //console.log(iccidStr);
 
           var obj = {};
           if(imei == null){
@@ -121,7 +121,7 @@ exports.deviceIds = function(callbackMain){
             obj["iccid"] = false;
           }else{
             var iccid = swap(iccidStr[1].toString())
-            console.log(iccid);
+            //console.log(iccid);
             //console.log("Big: " + iccidbuf.readInt32BE());
             //console.log("little: " + iccidbuf.readInt32LE());
             //var iccid = iccidbuf.readUIntBE();
