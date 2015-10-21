@@ -92,8 +92,8 @@ exports.deviceIds = function(callbackMain){
             obj["iccid"] = false;
           }else{
             var iccidbuf = new Buffer(iccidStr[1]);
-            console.log("Big: " + iccidbuf.readUIntBE());
-            console.log("little: " + iccidbuf.readUIntLE());
+            console.log("Big: " + iccidbuf.readInt32BE());
+            console.log("little: " + iccidbuf.readInt32LE());
             //var imei = imeibuf.readUIntBE();
             var iccid = iccidbuf.readUIntBE();
             obj["iccid"] = iccid;
@@ -121,8 +121,8 @@ exports.deviceIds = function(callbackMain){
             obj["iccid"] = false;
           }else{
             var iccidbuf = new Buffer(iccidStr[1]);
-            console.log("Big: " + iccidbuf.readUIntBE());
-            console.log("little: " + iccidbuf.readUIntLE());
+            console.log("Big: " + iccidbuf.readInt32BE());
+            console.log("little: " + iccidbuf.readInt32LE());
             var iccid = iccidbuf.readUIntBE();
             obj["iccid"] = iccid;
           }
