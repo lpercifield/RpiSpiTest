@@ -9,6 +9,7 @@ var signalMin = 4096;
 var peakToPeak;
 var localSpi;
 var sampleinterval;
+var sampleCounter = 1;
 var averageinterval;
 var audioArray = [];
 var eventIntervalTime = 120000; //120000
@@ -83,6 +84,7 @@ function startReadings(){
   eventInterval = setInterval(function(){
     events.emit('data',audioArray.slice(0));
     audioArray = [];
+    sampleCounter=1;
   },eventIntervalTime);
   audioDataInterval = setInterval(function(){
     var value = medianFun(average.slice(0));
@@ -92,7 +94,8 @@ function startReadings(){
     // }
     // outString += "*";
     // console.log(outString);
-    var micData = {"median":value,"max":maxPeak,"min":minPeak};
+    var micData = {"sample":sampleCounter"median":value,"max":maxPeak,"min":minPeak};
+    sampleCounter++;
     maxPeak = 0;
     minPeak = 4096;
     average = [];
