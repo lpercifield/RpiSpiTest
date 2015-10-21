@@ -20,7 +20,7 @@ var timolo;
  */
 var timoloOptions = {
   mode: 'json',
-  scriptPath: 'pi-timolo/'
+  scriptPath: '/home/pi/pi-timolo/'
 };
 
 config.use('file', { file: './config/default.json' });
@@ -84,10 +84,10 @@ function registerTimoloEvents(){
 //////////////////////////////////////////////////////
 
 //Empty timolo directories
-fs.emptyDir('~/pi-timolo/motion', function (err) {
+fs.emptyDir('/home/pi/pi-timolo/motion', function (err) {
   if (err) console.error(err)
 })
-fs.emptyDir('~/pi-timolo/timelapse', function (err) {
+fs.emptyDir('/home/pi/pi-timolo/timelapse', function (err) {
   if (err) console.error(err)
 })
 
