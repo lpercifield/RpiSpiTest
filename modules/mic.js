@@ -94,7 +94,7 @@ function startReadings(){
     // }
     // outString += "*";
     // console.log(outString);
-    var micData = {"sample":sampleCounter"median":value,"max":maxPeak,"min":minPeak};
+    var micData = {"sample":sampleCounter,"median":value,"max":maxPeak,"min":minPeak};
     sampleCounter++;
     maxPeak = 0;
     minPeak = 4096;
