@@ -137,6 +137,7 @@ async.series({
         timolo = new PythonShell('pi-timolo.py',timoloOptions);
         timolo.on('message', function (message) {
           if(message.hasOwnProperty('timolo')){
+            timolo.removeAllListeners('message');
             registerTimoloEvents();
             callback(null, true);
           }else{
