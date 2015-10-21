@@ -27,7 +27,7 @@ var deviceStatus = {
   "ethernet":false}
 exports.setup = function(gpio){
   _gpio = gpio;
-  _gpio.setup(yellowLed, _gpio.DIR_OUT,yellowReady);
+  _gpio.setup(yellowLed, _gpio.DIR_OUT,heartbeat);
   _gpio.setup(redLed, _gpio.DIR_OUT);
 }
 exports.setFaultStatus = function(object,status){
