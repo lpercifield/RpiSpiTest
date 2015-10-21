@@ -59,8 +59,10 @@ leds.setup(gpio);
  */
 gasSensors.events.on('data', function(sensorData) {
   //console.log('gasSensors have data');
-  console.log(JSON.stringify(sensorData));
-  dataObject.gas = sensorData;
+  //console.log(JSON.stringify(sensorData));
+  DATA.airq = sensorData.mq135;
+  DATA.co = sensorData.mq7;
+  //"airq": str(airq), "co": str(co)
 })
 
 tempSensor.events.on('data',function(sensorData){
@@ -92,7 +94,7 @@ function registerTimoloEvents(){
     if(message.hasOwnProperty('light')){
       DATA.lightlevel = message.level;
     }
-    console.log(message);
+    //console.log(message);
   });
   timolo.on('error', function (message) {
     console.error(message);
