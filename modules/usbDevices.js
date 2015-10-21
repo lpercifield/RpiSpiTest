@@ -107,8 +107,8 @@ exports.deviceIds = function(callbackMain){
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stderr.match(imeiRX);
           var iccidStr = stderr.match(iccidRX)
-          //console.log(imei);
-          //console.log(iccidStr);
+          console.log(imei);
+          console.log(iccidStr);
 
           var obj = {};
           if(imei == null){
