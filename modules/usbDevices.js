@@ -51,10 +51,11 @@ exports.deviceIds = function(callbackMain){
         if (error) {
           console.log("error "+error);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
-          var iccidRX = /\^ICCID: "(\d+)\n/;
+          var iccidRX = /\^ICCID: "(\d+)"\n/;
           //var imeibuf = new Buffer(stdout.match(imeiRX));
-          var imei = stdout.match(imeiRX);
           var iccidStr = stdout.match(iccidRX)
+          var imei = stdout.match(imeiRX);
+
           var obj = {};
           if(imei == null){
             obj["imei"] = false;
@@ -76,7 +77,7 @@ exports.deviceIds = function(callbackMain){
         if (stdout){
           console.log("stdout "+stdout);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
-          var iccidRX = /\^ICCID: "(\d+)\n/;
+          var iccidRX = /\^ICCID: "(\d+)"\n/;
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stdout.match(imeiRX);
           var iccidStr = stdout.match(iccidRX);
@@ -103,7 +104,7 @@ exports.deviceIds = function(callbackMain){
         if (stderr){
           //console.log("stderr "+ stderr);
           var imeiRX= /\nAT\+CGSN\n(\d+)\n/
-          var iccidRX = /\^ICCID: "(\d+)\n/;
+          var iccidRX = /\^ICCID: "(\d+)"\n/;
           //var imeibuf = new Buffer(stdout.match(imeiRX));
           var imei = stderr.match(imeiRX);
           var iccidStr = stderr.match(iccidRX)
